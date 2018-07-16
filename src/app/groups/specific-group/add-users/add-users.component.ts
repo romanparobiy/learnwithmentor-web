@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 import { GroupService } from '../../../common/services/group.service';
 import { AlertWindowsComponent } from '../../../components/alert-windows/alert-windows.component';
 import { User } from '../../../common/models/user';
+import { HttpErrorResponse } from '../../../../../node_modules/@angular/common/http';
 
 @Component({
   selector: 'app-add-users',
@@ -27,6 +28,10 @@ export class AddUsersComponent implements OnInit {
   private searchTerms = new Subject<string>();
   groupId: number;
   someUserAdded = false;
+  dataLoaded = false;
+  errorMessage: string;
+  errorMessageActive = false;
+  searchActive = false;
 
   @HostListener('window:keyup.esc') onKeyUp() {
     this.thisDialogRef.close(this.someUserAdded);
@@ -39,7 +44,14 @@ export class AddUsersComponent implements OnInit {
     event.currentTarget.setAttribute('disabled', 'disabled');
   }
 
+  activateErrorMessage(message: string): void {
+    this.errorMessage = message;
+    this.errorMessageActive = true;
+  }
+
   search(term: string): void {
+    this.errorMessageActive = false;
+    this.searchActive = true;
     this.searchTerms.next(term);
   }
 
@@ -47,14 +59,39 @@ export class AddUsersComponent implements OnInit {
     this.thisDialogRef.disableClose = true;
     this.thisDialogRef.backdropClick().subscribe(result => {
       this.thisDialogRef.close(this.someUserAdded);
-  });
+    });
     this.groupService.searchNotUsers('', this.groupId).subscribe(
-      user => this.users = user
+      data => {
+        this.users = data
+      },
+      (error: HttpErrorResponse) => {
+        this.activateErrorMessage(error.error.Message);
+        this.dataLoaded = true;
+      },
+      () => {
+        this.dataLoaded = true;
+        if (this.users === null || this.users.length < 1) {
+          this.activateErrorMessage('There are no users anymore');
+          const searchField = document.getElementById('search'); // todo find why null
+          searchField.setAttribute('disabled', 'disabled');
+        }
+      }
     );
     this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) => this.groupService.searchNotUsers(term, this.groupId))
-    ).subscribe(user => this.users = user);
+      switchMap((term: string) => this.groupService.searchNotUsers(term, this.groupId))).subscribe(
+        data => {
+          this.users = data;
+          this.searchActive = false;
+          if (this.users === null || this.users.length < 1) {
+            this.activateErrorMessage('There are no plans by this key');
+          }
+        },
+        (error: HttpErrorResponse) => {
+          this.activateErrorMessage(error.error.Message);
+          this.searchActive = false;
+        }
+      );
   }
 }

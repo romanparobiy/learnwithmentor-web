@@ -1,58 +1,68 @@
 <div class="main container">
   <div class="search ">
-    <mat-form-field class="search-input">
-      <input matInput #searchBox (keyup)="search(searchBox.value)" placeholder="Enter user name or surname" />
-    </mat-form-field>
+    <div *ngIf="dataLoaded">
+      <mat-form-field class="search-input">
+        <input matInput #searchBox (input)="search(searchBox.value)" placeholder="Enter user name or surname" />
+      </mat-form-field>
 
-    <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="users">
+      <div *ngIf="!errorMessageActive" class="mat-elevation-z8">
+        <table mat-table [dataSource]="users">
 
-        <ng-container matColumnDef="LastName">
-          <th mat-header-cell *matHeaderCellDef> LastName </th>
-          <td mat-cell *matCellDef="let element">
-            <span>{{element.LastName}}</span>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="LastName">
+            <th mat-header-cell *matHeaderCellDef> LastName </th>
+            <td mat-cell *matCellDef="let element">
+              <span>{{element.LastName}}</span>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="FirstName">
-          <th mat-header-cell *matHeaderCellDef> FirstName </th>
-          <td mat-cell *matCellDef="let element"> {{element.FirstName}} </td>
-        </ng-container>
+          <ng-container matColumnDef="FirstName">
+            <th mat-header-cell *matHeaderCellDef> FirstName </th>
+            <td mat-cell *matCellDef="let element"> {{element.FirstName}} </td>
+          </ng-container>
 
-        <ng-container matColumnDef="Email">
-          <th mat-header-cell *matHeaderCellDef> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element.Email}} </td>
-        </ng-container>
+          <ng-container matColumnDef="Email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.Email}} </td>
+          </ng-container>
 
-        <ng-container matColumnDef="Role">
-          <th mat-header-cell *matHeaderCellDef> Role </th>
-          <td mat-cell *matCellDef="let element">{{element.Role}} </td>
-        </ng-container>
+          <ng-container matColumnDef="Role">
+            <th mat-header-cell *matHeaderCellDef> Role </th>
+            <td mat-cell *matCellDef="let element">{{element.Role}} </td>
+          </ng-container>
 
-        <ng-container matColumnDef="Blocked">
-          <th mat-header-cell *matHeaderCellDef> State </th>
-          <td mat-cell *matCellDef="let element">
-            <div *ngIf="element.Blocked"> blocked </div>
-            <div *ngIf="!element.Blocked"> active</div>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="Blocked">
+            <th mat-header-cell *matHeaderCellDef> State </th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngIf="element.Blocked"> blocked </div>
+              <div *ngIf="!element.Blocked"> active</div>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="Check">
-          <th mat-header-cell *matHeaderCellDef> </th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-mini-fab color="primary" (click)="addChoosenUser($event, element)" matTooltip="Push to add user to group"
-              [matTooltipShowDelay]="1000" [matTooltipHideDelay]="500">
-              +
-            </button>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="Check">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-mini-fab color="primary" (click)="addChoosenUser($event, element)" matTooltip="Push to add user to group" [matTooltipShowDelay]="1000"
+                [matTooltipHideDelay]="500">
+                +
+              </button>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <div *ngIf="errorMessageActive" class="error-message">
+        <h4>{{errorMessage}}</h4>
+      </div>
     </div>
-    <mat-dialog-actions class="button-right">
+    <div class="center-spiner">
+      <mat-spinner *ngIf="!dataLoaded" class="spiner-margins" [color]="primary" [mode]="indeterminate"></mat-spinner>
+    </div>
+    <mat-dialog-actions class="button-row">
+      <mat-spinner *ngIf="searchActive" class="example-margin" diameter="35" strokeWidth="4" [color]="primary" [mode]="indeterminate">
+      </mat-spinner>
+      <div *ngIf="!searchActive"></div>
       <button mat-button [mat-dialog-close]="someUserAdded">Close</button>
     </mat-dialog-actions>
   </div>

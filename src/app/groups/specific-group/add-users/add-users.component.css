@@ -17,7 +17,21 @@
 table {
   width: 100%;
 }
-.button-right {
+.button-row {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+.center-spiner {
+  display: flex;
+  justify-content: center;
+}
+.spiner-margins {
+  margin: 10% 10%;
+  height: 40%;
+}
+.error-message {
+  display: flex;
+  justify-content: center;
+  color: red;
+  margin: 5px 5px;
 }
