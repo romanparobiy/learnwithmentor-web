@@ -9,18 +9,18 @@
     <!-- for sort -->
     <div class="flex-container ">
       <div class=" roles">
-        <div (click)="getType(null,role)" (click)="getByRole(paginator.PageSize, paginator.PageNumber, -1)" [class.selected]="role === selectedType">
+        <div (click)="getType(null,role)" (click)="getByRole(paginator.PageSize, 0, -1)" [class.selected]="role === selectedType">
           All
         </div>
-        <div *ngFor="let role of roles" (click)="getByRole(paginator.PageSize, paginator.PageNumber, role.Id)" (click)="getType(role.Name,role)" [class.selected]="role === selectedType">
+        <div *ngFor="let role of roles" (click)="getByRole(paginator.PageSize, 0, role.Id)" (click)="getType(role.Name,role)" [class.selected]="role === selectedType">
           {{role.Name}}
         </div>
       </div>
       <div class="state">
-        <div (click)="getUsersByState(paginator.PageSize, paginator.PageNumber, true)" [class.selected]="true === selectedState">
+        <div (click)="getUsersByState(paginator.PageSize, 0, true)" [class.selected]="true === selectedState">
           Blocked
         </div>
-        <div (click)="getUsersByState(paginator.PageSize, paginator.PageNumber, false)" [class.selected]="false === selectedState">
+        <div (click)="getUsersByState(paginator.PageSize, 0, false)" [class.selected]="false === selectedState">
           Active
         </div>
       </div>
