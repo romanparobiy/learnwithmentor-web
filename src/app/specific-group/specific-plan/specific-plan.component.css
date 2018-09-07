@@ -1,97 +1,102 @@
 .content {
-    margin-top: 100px;
-    justify-content: space-around;  
-    flex-direction: column;
-    align-items: center;
-    display: flex ;
+  margin-top: 100px;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
 }
 
-.sections{
-    width: 65%;
-    justify-content: space-between;  
-    flex-direction: column;
-    display: flex;
+.sections {
+  width: 65%;
+  justify-content: space-between;
+  flex-direction: column;
+  display: flex;
 }
 
-.panel{
-    width: 65%;
-    display: flex;
-    flex-direction: row-reverse;
+.panel {
+  width: 65%;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
-::ng-deep .mat-expansion-panel-header-description, .mat-expansion-panel-header-title{
-    justify-content: space-between !important;
+::ng-deep .mat-expansion-panel-header-description,
+.mat-expansion-panel-header-title {
+  justify-content: space-between !important;
 }
 
-::ng-deep .mat-expansion-panel-body{
-    padding: 0 !important;
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
 }
 
 ::ng-deep .mat-checkbox-inner-container {
-    height: 17px !important;
-    width: 17px !important;
+  height: 17px !important;
+  width: 17px !important;
 }
 
 ::ng-deep .mat-content {
-    overflow: visible !important;
+  overflow: visible !important;
 }
 
-::ng-deep .mat-form-field-infix{
-    width: 70px !important;
+::ng-deep .mat-form-field-infix {
+  width: 70px !important;
 }
 
-#group_name{
-    float: right;
-    font-family: Roboto,"Helvetica Neue",sans-serif;
-    font-size: 15px;
-    padding: 20px;
+#group_name {
+  float: right;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  padding: 20px;
 }
 
-textarea{
-    height: 100px;
+textarea {
+  height: 100px;
 }
 
-button{
-    margin-bottom: 20px;
+button {
+  margin-bottom: 20px;
 }
 
-.buttons{
+.buttons {
   display: flex;
   justify-content: space-between;
   height: 100%;
 }
-.info{
-    margin-bottom: 20px;
-}
-.usersC{
-    width: 65%;
-    display: flex;
-    flex-direction: row-reverse;
-    z-index: 1;
-    position: -webkit-sticky !important;
-    position: sticky !important;
-    top: 0px; 
-    padding: 5px;
-    margin-right: 75px;
+
+.info {
+  margin-bottom: 20px;
 }
 
-.stateIcons{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 0px 2.5px 0px 2.5px;
+.usersC {
+  width: 65%;
+  display: flex;
+  flex-direction: row-reverse;
+  z-index: 1;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0;
+  padding: 5px;
+  margin-right: 75px;
 }
-.userstatesicons{
-    margin-left: 25px;
-    width: 20px;
-    height: 20px; 
-    padding-top: 5px;
-    padding-bottom: 5px;  
+
+.stateIcons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0 2.5px 0 2.5px;
 }
-.clicked{
-    border: 5px solid rgba(0, 0, 255, 0.281);
-   margin-left: 19.5px; 
-   margin-right: -5px;
-   border-radius: 2px;
-   padding: 0px 0px 2px 2px;
+
+.userstatesicons {
+  margin-left: 25px;
+  width: 20px;
+  height: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.clicked {
+  border: 5px solid rgba(0, 0, 255, 0.281);
+  margin-left: 19.5px;
+  margin-right: -5px;
+  border-radius: 2px;
+  padding: 0 0 2px 2px;
 }

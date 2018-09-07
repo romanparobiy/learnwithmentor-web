@@ -4,7 +4,7 @@
   flex-direction: column;
 }
 
-.example-container>* {
+.example-container > * {
   width: calc(100%/3);
 }
 
@@ -12,11 +12,11 @@
   width: 100%;
 }
 
-.button-right{
+.button-right {
   float: right;
 }
 
-.forgot-password{
+.forgot-password {
   margin-bottom: 15px;
   text-decoration: none;
 }

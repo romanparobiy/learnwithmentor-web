@@ -1,9 +1,11 @@
 .input-full-width {
-    width: 100%;
+  width: 100%;
 }
+
 .input-height {
-    height: 150px;
+  height: 150px;
 }
-::ng-deep .mat-input-element:disabled{
-    color: black !important;
+
+::ng-deep .mat-input-element:disabled {
+  color: black !important;
 }

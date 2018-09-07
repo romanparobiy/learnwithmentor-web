@@ -1,13 +1,13 @@
 * {    
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
-.main {   
+.main {
   padding-top: 2%;
 }
 .search {
   width: 80%;
 }
-.container  {
+.container {
   display: flex;
   justify-content: center;
 }

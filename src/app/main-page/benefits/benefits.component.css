@@ -1,4 +1,4 @@
-h1{
+h1 {
   margin-bottom: 0;
   margin-top: 10px;
   font-family: Arial, Helvetica, sans-serif;
@@ -6,26 +6,27 @@ h1{
   align-items: center;
   justify-content: center;
 }
-.cardImage{
-    height: 100px;
-    margin-top: auto;
-    margin-bottom: auto;
-    float: right;
-    width: auto;
+
+.cardImage {
+  height: 100px;
+  margin-top: auto;
+  margin-bottom: auto;
+  float: right;
+  width: auto;
 }
 
-.cardContent{
-    text-align: center;
-    font-size: 20px;
-    width: 75%;
+.cardContent {
+  text-align: center;
+  font-size: 20px;
+  width: 75%;
 }
 
-.cardUpdate{
-    justify-content: center;
-    width: 70%;
-    height: auto;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
+.cardUpdate {
+  justify-content: center;
+  width: 70%;
+  height: auto;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }

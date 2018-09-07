@@ -1,21 +1,26 @@
 .input-full-width {
-    width:90%;
-    margin-left: 0px;
-    margin-right: 10%;
+  width: 90%;
+  margin-left: 0;
+  margin-right: 10%;
 }
+
 .input-height {
-    height: 100px;
+  height: 100px;
 }
+
 .not-existing {
-    text-align: center;
-    font-family: Roboto, Arial, sans-serif
+  text-align: center;
+  font-family: Roboto, Arial, sans-serif;
 }
+
 .fab {
-    position: relative; 
-    top: 0; right: -60 px;
-    display: inline-block;
-    border-radius: 10px;  
+  position: relative;
+  top: 0;
+  right: -60 px;
+  display: inline-block;
+  border-radius: 10px;
 }
+
 .close-button {
-    margin-left: auto;
+  margin-left: auto;
 }

@@ -1,31 +1,36 @@
-.image-wrap{
-    display: flex;
-    flex-direction: row;
+.image-wrap {
+  display: flex;
+  flex-direction: row;
 }
-input{
-    display:none;
+
+input {
+  display: none;
 }
-.userstates{
-    display: block;
-    width:40px;
-    height:40px;
-    border-radius: 100%;
-    margin: 5px 2.5px;
+
+.userstates {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin: 5px 2.5px;
 }
-.state{
-    margin: 5px 2.5px;
-    margin-left: 20% !important;
-    display: inline-block;
-    width:25px;
-    height:25px;
-    border-radius: 5px !important;
-    padding: 0px 0px 3px 3px;
+
+.state {
+  margin: 5px 2.5px;
+  margin-left: 20% !important;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px !important;
+  padding: 0 0 3px 3px;
 }
-li{
-    list-style-type:none;
+
+li {
+  list-style-type: none;
 }
-.clicked{
-    border: 5px solid rgba(0, 0, 255, 0.281);
-   margin: 0px -2.5px; 
+
+.clicked {
+  border: 5px solid rgba(0, 0, 255, 0.281);
+  margin: 0 -2.5px;
 }
 

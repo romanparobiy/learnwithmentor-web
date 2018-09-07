@@ -1,10 +1,10 @@
-.suggestion{
-    flex-direction: row;
-    display: flex;
+.suggestion {
+  flex-direction: row;
+  display: flex;
 }
 
-#title{
-    padding-top: 0.4375em;
-    padding-bottom: 0.4375em;
-    border-top: .84375em solid transparent;
+#title {
+  padding-top: 0.4375em;
+  padding-bottom: 0.4375em;
+  border-top: 0.84375em solid transparent;
 }

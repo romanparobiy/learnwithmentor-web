@@ -1,10 +1,10 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1{
+h1 {
   margin-bottom: 0;
   margin-top: 10px;
   font-family: Arial, Helvetica, sans-serif;
@@ -13,92 +13,97 @@ h1{
   justify-content: center;
 }
 
-h3{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    text-align: center;
+h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  text-align: center;
 }
 
-p{
-    margin-left:auto;
-    margin-right:auto;
-    font-size: 17px;
-    font-family: Arial, Helvetica, sans-serif;
-    word-wrap: break-word;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-height: 102px;
+p {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 102px;
 }
 
-.card{
-    display: flex;
+.card {
+  display: flex;
 }
 
-mat-card{
-    height:152px;
-    padding: 0px;
+mat-card {
+  height: 152px;
+  padding: 0;
 }
 
-.imgdiv{
-    margin-left:1px;
-    margin-top:1px;
-    margin-right: 10px;
-    margin-bottom: 1px;    
+.imgdiv {
+  margin-left: 1px;
+  margin-top: 1px;
+  margin-right: 10px;
+  margin-bottom: 1px;
 }
-.imgdiv img{
-    width: 150px;
-    height: 150px;
+
+.imgdiv img {
+  width: 150px;
+  height: 150px;
 }
 
 [class*='col-'] {
-    float: left;
-    padding-right: 20px;
-  }
-[class*='col-']:last-of-type {
-padding-right: 0;
-}
-a {
-text-decoration: none;
+  float: left;
+  padding-right: 20px;
 }
 
-.textdiv{
-    width:100%;
-    margin-top:10px;
+[class*='col-']:last-of-type {
+  padding-right: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.textdiv {
+  width: 100%;
+  margin-top: 10px;
 }
   
 .grid {
-margin-top: 10px;
-margin-left: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
 }
 
 .col-1-4 {
-width: 25%;
+  width: 25%;
 }
+
 @media only screen and (max-width: 1800px) {
-    .col-1-4 {
-        width: 49.99999%;
-        margin: 6px 0;
-    }
+  .col-1-4 {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
 }
 
 @media only screen and (max-width: 800px) {
-    .col-1-4 {
-        width: 100%;
-    }
-}
-.grid-pad > [class*='col-']:last-of-type {
-    padding-right: 20px;
+  .col-1-4 {
+    width: 100%;
+  }
 }
 
-.clear{
-    clear: both;
+.grid-pad > [class*='col-']:last-of-type {
+  padding-right: 20px;
+}
+
+.clear {
+  clear: both;
 }
 
 .spiner-margins {
-    height: 40%;
+  height: 40%;
 }
 
 .spinner-container {
-    width: 150px;
-    padding: 25px 25px;
+  width: 150px;
+  padding: 25px 25px;
 }

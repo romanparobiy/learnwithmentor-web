@@ -1,18 +1,18 @@
 .example-form {
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
-  }
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
 
-  .example-container > * {
-    width: calc(100%/3);
-    justify-content: center;
-  }
+.example-container > * {
+  width: calc(100%/3);
+  justify-content: center;
+}
 
-  .container-update{
-    width: 100%;
-  }
+.container-update {
+  width: 100%;
+}
 
-.button-right{
+.button-right {
   float: right;
 }
