@@ -41,6 +41,7 @@ export class SpecificPlanComponent implements OnInit {
   inProgress = 'P';
   approved = 'A';
   rejected = 'R';
+  reseted = 'RE';
   panelOpenState = false;
   is_student = true;
   sections: Section[];
@@ -99,6 +100,9 @@ export class SpecificPlanComponent implements OnInit {
     if (state.toLowerCase() === 'a') {
       return 'Approved';
     }
+    if (state.toLowerCase() === 're') {
+      return 'Reseted';
+    }
     return 'Done';
   }
 
@@ -113,6 +117,15 @@ export class SpecificPlanComponent implements OnInit {
     const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
     this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = this.rejected;
     this.taskService.updateUserTaskState(userTaskId, this.rejected).subscribe();
+    this.setUsertasks();
+  }
+
+  reset(sectionId,taskId,selectedUser:number){
+    const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
+    if(this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State != this.inProgress){
+         this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = this.done;
+        }
+    this.taskService.updateUserTaskState(userTaskId, this.reseted).subscribe();
     this.setUsertasks();
   }
 
@@ -147,8 +160,6 @@ export class SpecificPlanComponent implements OnInit {
       width: '500px'
     });
   }
-
-  
 
   ngOnInit() {
     this.isLoadedUser = false;
@@ -321,7 +332,7 @@ export class SpecificPlanComponent implements OnInit {
     for (let i = 0; i < section.Content.Tasks.length; i++) {
       userTasks = new Array<UserTask>();
       allTasks = new UsersTasks();
-      for(let j = 0; j < this.users.length; j++) {
+      for (let j = 0; j < this.users.length; j++) {
         userTasks.push(usersTasks[j].UserTasks[i + index]);
       }
       allTasks.UserTasks = userTasks;

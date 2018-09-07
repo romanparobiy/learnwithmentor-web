@@ -46,7 +46,7 @@ export class TaskService {
     if (planId != null) {
       return this.http.get<Section[]>(`${this.url}plan/${planId}/sections`).pipe(
         catchError(this.handleError<Section[]>(`get Section for Plan`)));
-      }
+    }
   }
   getTask(id: number): Observable<Task> {
     return this.http.get<Task>(`${this.url}task/${id}`).pipe(
@@ -75,10 +75,10 @@ export class TaskService {
   }
   getAllTasksStateForAllGroupUsers(userIds: number[], planTaskIds: number[]): Observable<any> {
     let request = `${this.url}task/state/all?`;
-    for (const user of userIds ) {
+    for (const user of userIds) {
       request = request + `userIds=${user}&`;
     }
-    for (const planTask of planTaskIds ) {
+    for (const planTask of planTaskIds) {
       request = request + `planTaskIds=${planTask}&`;
     }
     request = request.substring(0, request.length - 1);
@@ -88,10 +88,10 @@ export class TaskService {
 
   getUsersTasksForGroupUsers(userId: number[], planTaskIds: number[]): Observable<UsersTasks[]> {
     let request = `${this.url}task/allusertasks?`;
-    for (const user of userId ) {
+    for (const user of userId) {
       request = request + `userId=${user}&`;
     }
-    for (const planTask of planTaskIds ) {
+    for (const planTask of planTaskIds) {
       request = request + `planTaskId=${planTask}&`;
     }
     request = request.substring(0, request.length - 1);
@@ -101,7 +101,7 @@ export class TaskService {
 
   getUserTasks(userId: number, planTaskIds: number[]): Observable<UserTask[]> {
     let request = `${this.url}task/usertasks?userId=${userId}&`;
-    for (const planTask of planTaskIds ) {
+    for (const planTask of planTaskIds) {
       request = request + `planTaskId=${planTask}&`;
     }
     request = request.substring(0, request.length - 1);
@@ -150,8 +150,6 @@ export class TaskService {
     return this.http.put<string>(link, userTask.Result as string, { headers: reqHeader }).pipe(
       catchError(val => of(val)));
   }
- 
-
 
   updateProposedEndDate(userTaskId: number, date: string): Observable<any> {
     const link = `${this.url}task/usertask/proposedEndDate?userTaskId=${userTaskId}&proposeEndDate=${date}`;

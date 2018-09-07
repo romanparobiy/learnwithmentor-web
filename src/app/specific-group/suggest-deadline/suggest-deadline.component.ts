@@ -13,11 +13,9 @@ import { DateTime } from 'date-time-js';
   templateUrl: './suggest-deadline.component.html',
   styleUrls: ['./suggest-deadline.component.css']
 })
-export class SuggestDeadlineComponent implements OnInit {
- 
+export class SuggestDeadlineComponent {
+  @Input() private task: string;
 
-  @Input()
-  private task: string;
   private userTask: UserTask;
   private previousProposeEndDate: DateTime;
 
@@ -26,9 +24,9 @@ export class SuggestDeadlineComponent implements OnInit {
     private dialogsService: DialogsService,
     private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.userTask = data.userTask;
-      this.task = data.taskName;
-      if (this.userTask.ProposeEndDate) {
+    this.userTask = data.userTask;
+    this.task = data.taskName;
+    if (this.userTask.ProposeEndDate) {
       this.previousProposeEndDate = new DateTime(this.userTask.ProposeEndDate.toString().split('T')[0]);
     }
   }
@@ -40,13 +38,13 @@ export class SuggestDeadlineComponent implements OnInit {
     }
     if (this.userTask.ProposeEndDate && !this.previousProposeEndDate.isEqual(currentProposeEndDate)) {
       this.dialogsService
-      .confirm('Confirm Dialog', 'You have unsaved changes. Do you want to save them?')
-      .subscribe(res => {
-        if (res) {
-          this.saveChanges();
-          this.alertwindow.openSnackBar('Your changes are saved!', 'Ok');
-        }
-      });
+        .confirm('Confirm Dialog', 'You have unsaved changes. Do you want to save them?')
+        .subscribe(res => {
+          if (res) {
+            this.saveChanges();
+            this.alertwindow.openSnackBar('Your changes are saved!', 'Ok');
+          }
+        });
     }
     this.dialogRef.close();
   }
@@ -55,8 +53,7 @@ export class SuggestDeadlineComponent implements OnInit {
     if (this.userTask.ProposeEndDate) {
       if (this.userTask.ProposeEndDate instanceof Object) {
         this.taskService.updateProposedEndDate(this.userTask.Id, this.userTask.ProposeEndDate.toISOString()).subscribe();
-      }
-      else {
+      } else {
         this.taskService.updateProposedEndDate(this.userTask.Id, this.userTask.ProposeEndDate).subscribe();
       }
     }
@@ -65,8 +62,4 @@ export class SuggestDeadlineComponent implements OnInit {
   onSubmitClick() {
     this.saveChanges();
   }
-  
-  ngOnInit() {
-  }
-
 }
