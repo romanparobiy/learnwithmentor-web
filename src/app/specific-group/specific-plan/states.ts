@@ -1,4 +1,4 @@
-export enum States{
+export enum States {
     done = 'D',
     inProgress = 'P',
     approved = 'A',

@@ -23,7 +23,7 @@ import { ReviewSuggestedDeadlinesComponent } from '../review-suggested-deadlines
 import { Section } from '../../common/models/sections';
 import { MatDialog } from '@angular/material';
 import { DateTime } from 'date-time-js';
-import {States} from './states'
+import {States} from './states';
 
 export class UsersWithTasks {
   user: UserWithImage;
@@ -38,11 +38,10 @@ export class UsersWithTasks {
 })
 
 export class SpecificPlanComponent implements OnInit {
-  
   panelOpenState = false;
   is_student = true;
   sections: Section[];
-  states:any;
+  states: any;
   imageData = null;
   users: UsersWithTasks[] = null;
   user: UsersWithTasks = null;
@@ -117,9 +116,9 @@ export class SpecificPlanComponent implements OnInit {
     this.setUsertasks();
   }
 
-  reset(sectionId,taskId,selectedUser:number){
+  reset(sectionId, taskId, selectedUser: number) {
     const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
-    if(this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State != States.inProgress){
+    if (this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State !== States.inProgress) {
          this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = States.done;
         }
     this.taskService.updateUserTaskState(userTaskId, States.reset).subscribe();
