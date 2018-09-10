@@ -49,8 +49,7 @@ export class ConversationComponent implements OnInit {
         } else {
           this.messages = mes.body;
         }
-      }
-    );
+      });
   }
 
    onSendClick() {

@@ -54,6 +54,9 @@
                   (click)="approve(j, i, selectedUser)">Approve</button>
                 <button mat-raised-button class="button-change" [disabled]="!isTaskDone(section.Content.UsersTasks[i].UserTasks[selectedUser].State)"
                   (click)="reject(j, i, selectedUser)">Reject</button>
+                <button mat-raised-button class="button-change" 
+                  [disabled]="isTaskDone(section.Content.UsersTasks[i].UserTasks[selectedUser].State)"
+                 (click)="reset(j, i, selectedUser)">Reset</button>
               </div>
             </div>
           </mat-expansion-panel>

@@ -23,6 +23,7 @@ import { ReviewSuggestedDeadlinesComponent } from '../review-suggested-deadlines
 import { Section } from '../../common/models/sections';
 import { MatDialog } from '@angular/material';
 import { DateTime } from 'date-time-js';
+import {States} from './states';
 
 export class UsersWithTasks {
   user: UserWithImage;
@@ -37,10 +38,6 @@ export class UsersWithTasks {
 })
 
 export class SpecificPlanComponent implements OnInit {
-  done = 'D';
-  inProgress = 'P';
-  approved = 'A';
-  rejected = 'R';
   panelOpenState = false;
   is_student = true;
   sections: Section[];
@@ -76,12 +73,12 @@ export class SpecificPlanComponent implements OnInit {
 
   sendState(sectionId, taskId: number, event: any) {
     if (event.checked) {
-      this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[0].State = this.done;
-      this.taskService.updateUserTaskState(event.source.id, this.done).subscribe();
+      this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[0].State = States.done;
+      this.taskService.updateUserTaskState(event.source.id, States.done).subscribe();
       this.setPictureState(sectionId, taskId);
     } else {
-      this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[0].State = this.inProgress;
-      this.taskService.updateUserTaskState(event.source.id, this.inProgress).subscribe();
+      this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[0].State = States.inProgress;
+      this.taskService.updateUserTaskState(event.source.id, States.inProgress).subscribe();
       this.setPictureState(sectionId, taskId);
     }
   }
@@ -99,20 +96,32 @@ export class SpecificPlanComponent implements OnInit {
     if (state.toLowerCase() === 'a') {
       return 'Approved';
     }
+    if (state.toLowerCase() === 're') {
+      return 'Reseted';
+    }
     return 'Done';
   }
 
   approve(sectionId, taskId, selectedUser: number) {
     const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
-    this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = this.approved;
-    this.taskService.updateUserTaskState(userTaskId, this.approved).subscribe();
+    this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = States.approved;
+    this.taskService.updateUserTaskState(userTaskId, States.approved).subscribe();
     this.setUsertasks();
   }
 
   reject(sectionId, taskId, selectedUser: number) {
     const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
-    this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = this.rejected;
-    this.taskService.updateUserTaskState(userTaskId, this.rejected).subscribe();
+    this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = States.rejected;
+    this.taskService.updateUserTaskState(userTaskId, States.rejected).subscribe();
+    this.setUsertasks();
+  }
+
+  reset(sectionId, taskId, selectedUser: number) {
+    const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
+    if (this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State !== States.inProgress) {
+         this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = States.done;
+        }
+    this.taskService.updateUserTaskState(userTaskId, States.reset).subscribe();
     this.setUsertasks();
   }
 
@@ -178,16 +187,16 @@ export class SpecificPlanComponent implements OnInit {
 
   getPicturesState(alluserState: UserTask[]): UserTask[] {
     for (const userState of alluserState) {
-      if (userState.State.toUpperCase() === this.inProgress) {
+      if (userState.State.toUpperCase() === States.inProgress) {
         userState.Image = '../../../assets/images/inprogress.png';
       } else
-        if (userState.State.toUpperCase() === this.done) {
+        if (userState.State.toUpperCase() === States.done) {
           userState.Image = '../../../assets/images/done.png';
         } else
-          if (userState.State.toUpperCase() === this.approved) {
+          if (userState.State.toUpperCase() === States.approved) {
             userState.Image = '../../../assets/images/approved.png';
           } else
-            if (userState.State.toUpperCase() === this.rejected) {
+            if (userState.State.toUpperCase() === States.rejected) {
               userState.Image = '../../../assets/images/rejected.png';
             } else {
               userState.Image = '../../../assets/images/inprogress.png';
@@ -197,16 +206,16 @@ export class SpecificPlanComponent implements OnInit {
   }
 
   setPictureState(section: number, id: number) {
-    if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.inProgress) {
+    if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.inProgress) {
       this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/inprogress.png';
     } else
-      if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.done) {
+      if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.done) {
         this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/done.png';
       } else
-        if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.approved) {
+        if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.approved) {
           this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/approved.png';
         } else
-          if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === this.rejected) {
+          if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.rejected) {
             this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/rejected.png';
           } else {
             this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/inprogress.png';
@@ -273,15 +282,15 @@ export class SpecificPlanComponent implements OnInit {
   }
 
   private isTaskDone(state: string): boolean {
-    return state === this.done;
+    return state === States.done;
   }
 
   private isTaskApproved(state: string): boolean {
-    return state === this.approved;
+    return state === States.approved;
   }
 
   private isChecked(state: string): boolean {
-    return state === this.approved || state === this.done;
+    return state === States.approved || state === States.done;
   }
 
   setUserPic(img: Image) {
