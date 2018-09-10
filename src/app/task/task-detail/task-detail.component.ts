@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../common/models/task';
 import { MatDialog } from '@angular/material';
+import { AuthService } from '../../common/services/auth.service';
 import { TaskEditorComponent } from '../task-editor/task-editor.component';
 import { TaskSubmitorComponent } from '../task-submitor/task-submitor.component';
 import { ConversationComponent } from '../conversation/conversation.component';
@@ -14,10 +15,13 @@ export class TaskDetailComponent implements OnInit {
 
   @Input()
   task: Task;
-  constructor(public dialog: MatDialog) {
-  }
+  isStudent = false;
+  constructor(public dialog: MatDialog, private authService: AuthService) { }
 
   ngOnInit() {
+    if (this.authService.isStudent()) {
+      this.isStudent = true;
+    }
   }
 
   openEditDialog(): void {
