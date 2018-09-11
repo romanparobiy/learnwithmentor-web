@@ -32,8 +32,8 @@ export class UserService {
     );
   }
 
-  getUser(): Observable<User> {
-    return this.http.get<User>(`${this.url}/profile`).pipe(
+  getUser(id: number = 0): Observable<User> {
+    return this.http.get<User>(`${this.url}/profile?id=${id}`).pipe(
       catchError(this.handleError<User>(`getUser`))
     );
   }
@@ -112,7 +112,7 @@ export class UserService {
     return this.http.get<Pagination<User>>(`${this.url}/search?key=${param}&role=${roleName}
     &pageSize=${pageSize}&pageNumber=${pageNumber}`).pipe(
       catchError(this.handleError<Pagination<User>>(`searchUsers`))
-    );
+      );
   }
 
   updateImage(id: number, file: File) {

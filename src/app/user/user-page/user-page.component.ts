@@ -9,6 +9,7 @@ import { Statistics } from '../../common/models/statistics';
 import { UserEditComponent } from '../user-edit/user-edit.component';
 import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 import { AuthService } from '../../common/services/auth.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-user-page',
@@ -32,35 +33,43 @@ export class UserPageComponent implements OnInit {
     private alertWindow: AlertWindowsComponent,
     private authService: AuthService,
     private httpStatusCodeService: HttpStatusCodeService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.userId = this.authService.getUserId();
-    this.userService.getUser().subscribe(
-      resp => {
-        this.userData = resp;
-        this.imageLoading = true;
-        this.statisticsLoading = true;
-        this.userService.getImage(this.userId).subscribe(
-          response => {
-            if (this.httpStatusCodeService.isOk(response.status)) {
-              this.setUserPic(response.body);
-            } else {
-              this.imageData = '../../../assets/images/user-default.png';
-            }
-            this.imageLoading = false;
-          }
-        );
-        this.userService.getStatistics().subscribe(
-          r => {
-            if (this.httpStatusCodeService.isOk(r.status)) {
-              this.userStats = r.body;
-            }
-            this.statisticsLoading = false;
-          }
-        );
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.userId = +params['id'];
+
+      if(!this.userId) {
+        this.userId = this.authService.getUserId();
       }
-    );
+
+      this.userService.getUser(this.userId).subscribe(
+        resp => {
+          this.userData = resp;
+          this.imageLoading = true;
+          this.statisticsLoading = true;
+          this.userService.getImage(this.userId).subscribe(
+            response => {
+              if (this.httpStatusCodeService.isOk(response.status)) {
+                this.setUserPic(response.body);
+              } else {
+                this.imageData = '../../../assets/images/user-default.png';
+              }
+              this.imageLoading = false;
+            }
+          );
+          this.userService.getStatistics().subscribe(
+            r => {
+              if (this.httpStatusCodeService.isOk(r.status)) {
+                this.userStats = r.body;
+              }
+              this.statisticsLoading = false;
+            }
+          );
+        }
+      );
+    });
   }
 
   onFileSelected(event) {
