@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Your conversation about {{task.Name}}</h2>
 <mat-dialog-content>
-  <div>
+  <div class="conversation-history" #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <h3 class="not-existing" *ngIf="notExistingMessage">{{notExistingMessage}}</h3>
     <mat-card *ngFor="let message of messages">
       <mat-card-header>

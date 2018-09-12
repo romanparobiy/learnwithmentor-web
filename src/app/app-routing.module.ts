@@ -43,6 +43,7 @@ const routes: Routes = [
   { path: 'create-plan', component: CreatePlanComponent, canActivate: [AuthGuard, MentorGuard] },
   { path: 'mygroups', component: GroupsComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: UserPageComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:id', component: UserPageComponent, canActivate: [AuthGuard] },
   { path: 'not-authorized', component: NotAuthorizedComponent},
   { path: 'email-not-confirmed', component: EmailNotConfirmedComponent},
   { path: 'begin-password-reset', component: BeginPasswordResetComponent},
