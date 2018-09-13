@@ -92,7 +92,7 @@ export class GroupService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      this.alertWindow.openSnackBar(error.message + " error",'OK');
+      this.alertWindow.openSnackBar(error.message, 'OK');
       return of(result as T);
     };
   }

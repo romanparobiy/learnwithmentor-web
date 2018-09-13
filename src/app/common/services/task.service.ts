@@ -190,7 +190,7 @@ export class TaskService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      this.alertWindow.openSnackBar(error.message + " error",'OK');
+      this.alertWindow.openSnackBar(error.message, 'OK');
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
