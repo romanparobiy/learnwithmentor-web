@@ -13,7 +13,9 @@
     </div>
     <input class="fileInput" type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/jpg, image/png" #fileInput/>
     <h3 *ngIf="userData">{{userData.FirstName}} {{userData.LastName}}</h3>
+    <h3 *ngIf="userData">{{userData.Email}}</h3>
     <h4 *ngIf="userData">{{userData.Role}}</h4>
+    
     
     <div class="buttons">
         <button mat-button (click)="onEditClick()">Edit</button>
