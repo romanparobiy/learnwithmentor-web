@@ -11,13 +11,15 @@ import { Login } from '../models/login';
 import { Statistics } from '../models/statistics';
 import { Pagination } from '../models/pagination';
 import { PageEvent } from '@angular/material';
+import { AlertWindowsComponent } from './../../components/alert-windows/alert-windows.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   roleName: string;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, 
+    private alertWindow: AlertWindowsComponent) { }
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -140,7 +142,8 @@ export class UserService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
+     // console.error(error);
+     this.alertWindow.openSnackBar(error.message,'OK');
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

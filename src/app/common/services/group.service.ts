@@ -9,13 +9,15 @@ import { Group } from '../models/group';
 import { Plan } from '../models/plan';
 import { UserWithImage } from '../models/userWithImage';
 import { Email } from '../models/email';
+import { AlertWindowsComponent } from './../../components/alert-windows/alert-windows.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private alertWindow: AlertWindowsComponent) { }
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -90,6 +92,7 @@ export class GroupService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
+      this.alertWindow.openSnackBar(error.message + " error",'OK');
       return of(result as T);
     };
   }

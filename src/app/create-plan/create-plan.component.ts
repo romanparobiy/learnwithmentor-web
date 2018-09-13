@@ -110,7 +110,9 @@ export class CreatePlanComponent implements OnInit {
       const preview = document.getElementById('newImage') as HTMLImageElement;
       const reader = new FileReader();
       reader.onloadend = function () {
-        preview.src = reader.result;
+        if(typeof reader.result === "string" ) {
+            preview.src= reader.result;
+          }
       };
       reader.readAsDataURL(this.selectedFile);
     }
