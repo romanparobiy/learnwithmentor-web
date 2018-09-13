@@ -22,7 +22,7 @@ export class UsersComponent implements OnInit {
   constructor(private userService: UserService, private alertwindow: AlertWindowsComponent, private dialogsService: DialogsService) {
   }
 
-  displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked', "Action"];
+  displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked', 'Action'];
   allUsers = -1;
   roles: Role[];
   users: User[];

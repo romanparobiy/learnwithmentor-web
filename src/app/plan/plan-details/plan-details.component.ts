@@ -17,10 +17,9 @@ export class PlanDetailsComponent implements OnInit {
   constructor(public dialog: MatDialog, private authService: AuthService) { }
 
   ngOnInit() {
-    if (this.authService.isStudent()) {
+   if (this.authService.isStudent()) {
       this.isStudent = true;
     }
-
   }
   openEditDialog(): void {
     const dialogRef = this.dialog.open(PlanEditorComponent, {

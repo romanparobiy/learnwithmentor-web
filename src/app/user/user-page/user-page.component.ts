@@ -40,7 +40,7 @@ export class UserPageComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.userId = +params['id'];
 
-      if(!this.userId) {
+      if (!this.userId) {
         this.userId = this.authService.getUserId();
       }
 
