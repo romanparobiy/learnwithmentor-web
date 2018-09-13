@@ -13,6 +13,11 @@
   font-family: Roboto, Arial, sans-serif;
 }
 
+.conversation-history {
+  height: 300px;
+  overflow: auto;
+}
+
 .fab {
   position: relative;
   top: 0;
