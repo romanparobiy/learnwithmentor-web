@@ -14,6 +14,7 @@ import { text } from '@angular/core/src/render3/instructions';
 import { StringifyOptions } from 'querystring';
 import { Pagination } from '../models/pagination';
 import { Section } from '../models/sections';
+import { AlertWindowsComponent } from './../../components/alert-windows/alert-windows.component';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -27,7 +28,8 @@ const httpOptionsObserve = {
 })
 export class TaskService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private alertWindow: AlertWindowsComponent) { }
   // private url = '../assets/tasks.json';
   private url = `${environment.apiUrl}`;
 
@@ -188,7 +190,7 @@ export class TaskService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      // console.error(error);
+      this.alertWindow.openSnackBar(error.message, 'OK');
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { Statistics } from '../../common/models/statistics';
+import { Email } from '../../common/models/email';
 import { UserEditComponent } from '../user-edit/user-edit.component';
 import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 import { AuthService } from '../../common/services/auth.service';
@@ -20,6 +21,7 @@ export class UserPageComponent implements OnInit {
 
   displayedColumns = ['In Progress'];
   userId: number;
+  userEmail: string;
   userData: User;
   userStats = null;
   selectedFile: File = null;
@@ -43,6 +45,7 @@ export class UserPageComponent implements OnInit {
       if (!this.userId) {
         this.userId = this.authService.getUserId();
       }
+
 
       this.userService.getUser(this.userId).subscribe(
         resp => {

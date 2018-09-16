@@ -6,13 +6,15 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Image } from '../models/image';
 import { Task } from '../models/task';
+import { AlertWindowsComponent } from './../../components/alert-windows/alert-windows.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private alertWindow: AlertWindowsComponent) { }
 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -101,7 +103,7 @@ export class PlanService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
+      this.alertWindow.openSnackBar(error.message, 'OK');
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
