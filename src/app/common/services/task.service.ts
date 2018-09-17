@@ -36,7 +36,7 @@ export class TaskService {
 
   getTasks(planId?: number): Observable<Task[]> {
     if (planId != null) {
-      return this.http.get<Task[]>(`${this.url}plan/${planId}/tasks`).pipe(
+      return this.http.get<Task[]>(`${this.url}plan/${planId}/tasks`, {headers: new HttpHeaders({ 'No-Auth': 'True' }) }).pipe(
         catchError(this.handleError<Task[]>(`get Tasks for Plan`)));
     } else {
       return this.http.get<Task[]>(this.url + 'task').pipe(

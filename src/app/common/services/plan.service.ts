@@ -26,7 +26,7 @@ export class PlanService {
   private url = `${environment.apiUrl}plan`;
 
   getPlans(): Observable<Plan[]> {
-    return this.http.get<Plan[]>(this.url).pipe(
+    return this.http.get<Plan[]>(this.url, {headers: new HttpHeaders({ 'No-Auth': 'True' }) }).pipe(
       catchError(this.handleError<Plan[]>(`getPlans`))
     );
   }
@@ -51,7 +51,7 @@ export class PlanService {
     );
   }
   getPlan(id: number): Observable<Plan> {
-    return this.http.get<Plan>(`${this.url}/${id}`).pipe(
+    return this.http.get<Plan>(`${this.url}/${id}`, {headers: new HttpHeaders({ 'No-Auth': 'True' }) }).pipe(
       catchError(this.handleError<Plan>(`getPlan id=${id}`))
     );
   }

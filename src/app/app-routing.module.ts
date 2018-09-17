@@ -39,7 +39,7 @@ const routes: Routes = [
   { path: 'plan/:id/edit', component: SpecificGroupComponent, canActivate: [AuthGuard, MentorGuard] },
   { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
   { path: 'listTasks', component: AddTasksComponent, canActivate: [AuthGuard] },
-  { path: 'plans', component: PlansComponent, canActivate: [AuthGuard] },
+  { path: 'plans', component: PlansComponent },
   { path: 'create-plan', component: CreatePlanComponent, canActivate: [AuthGuard, MentorGuard] },
   { path: 'mygroups', component: GroupsComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: UserPageComponent, canActivate: [AuthGuard] },

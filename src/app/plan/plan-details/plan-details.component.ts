@@ -13,12 +13,12 @@ export class PlanDetailsComponent implements OnInit {
 
   @Input()
   plan: Plan;
-  isStudent = false;
+  hasPermisionsToEdit = false;
   constructor(public dialog: MatDialog, private authService: AuthService) { }
 
   ngOnInit() {
-   if (this.authService.isStudent()) {
-      this.isStudent = true;
+   if (this.authService.isAdmin() || this.authService.isMentor()) {
+      this.hasPermisionsToEdit = true;
     }
   }
   openEditDialog(): void {
