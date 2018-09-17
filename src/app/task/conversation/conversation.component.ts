@@ -24,6 +24,7 @@ export class ConversationComponent implements OnInit {
   private userMessage: string;
   private recentMessages: Message[] = [];
   private userId: number;
+  private minValueLength = 2;
 
   constructor(public dialogRef: MatDialogRef<ConversationComponent>,
     private  alertwindow: AlertWindowsComponent,
@@ -70,10 +71,17 @@ export class ConversationComponent implements OnInit {
   }
 
   onKeyPress(event) {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && this.userMessage.length >= this.minValueLength) {
       this.onSendClick();
       this.userMessage = '';
     }
+  }
+
+  setClasses() {
+    return {
+      fab: true,
+      disable: (this.userMessage || '').length < this.minValueLength,
+    };
   }
 
   ngOnInit() {

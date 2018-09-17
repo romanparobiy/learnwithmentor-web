@@ -24,7 +24,7 @@
 <mat-form-field class="input-full-width">
     <textarea class="input-height" matInput placeholder="Your message"
     #descriptionTbx [(ngModel)]="userMessage" (keydown)="onKeyPress($event)" maxlength="999"></textarea>
-    <button class="fab" mat-flat-button color="primary" (click)="onSendClick()">Send</button>
+    <button [ngClass]="setClasses()" mat-flat-button color="primary" (click)="onSendClick()">Send</button>
 </mat-form-field>
 
 
