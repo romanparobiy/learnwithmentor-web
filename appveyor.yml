@@ -3,6 +3,23 @@ build_script:
 - cmd: >-
     npm i
 
+    npm audit fix
+
     npm run build
 
     npm run lint
+notifications:
+- provider: Email
+  to:
+  - kravchenkov.me@gmail.com
+  - yura.stashko98@gmail.com
+  - yurikozlovskij@gmail.com
+  - solayusko@gmail.com
+  - bondarets.bogdan@gmail.com
+  - flyssoffia@gmail.com
+  - nazarp06@gmail.com
+  subject: AppVeyor build
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
+  
