@@ -18,11 +18,13 @@ export class PaginationComponent implements OnInit {
   pageSizeOptions = [5, 10, 20];
   @Output()
   page = new EventEmitter<PageEvent>();
+
   constructor() {
   }
 
   ngOnInit() {
   }
+
   handlePage(event: PageEvent) {
     this.page.emit(event);
   }
