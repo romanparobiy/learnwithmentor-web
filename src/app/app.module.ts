@@ -78,6 +78,7 @@ import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { EmailNotConfirmedComponent } from './email-not-confirmed/email-not-confirmed.component';
 import { SuggestDeadlineComponent } from './specific-group/suggest-deadline/suggest-deadline.component';
 import { ReviewSuggestedDeadlinesComponent } from './specific-group/review-suggested-deadlines/review-suggested-deadlines.component';
+import { CustomPaginatorComponent } from './custom-paginator/custom-paginator.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +127,8 @@ import { ReviewSuggestedDeadlinesComponent } from './specific-group/review-sugge
     ConfirmEmailComponent,
     EmailNotConfirmedComponent,
     SuggestDeadlineComponent,
-    ReviewSuggestedDeadlinesComponent
+    ReviewSuggestedDeadlinesComponent,
+    CustomPaginatorComponent
     ],
   imports: [
     AppRoutingModule,
