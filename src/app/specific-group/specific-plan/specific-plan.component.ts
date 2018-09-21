@@ -123,8 +123,7 @@ export class SpecificPlanComponent implements OnInit {
          this.taskService.updateUserTaskState(userTaskId, States.done).subscribe();
          this.setUsertasks();
         }
-    
-  }
+    }
 
   onResultClick(userTask: UserTask, task: Task) {
     const data = { userTask: userTask, task: task };
