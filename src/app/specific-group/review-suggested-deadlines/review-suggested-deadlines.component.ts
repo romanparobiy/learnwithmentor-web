@@ -16,9 +16,9 @@ import { DateTime } from 'date-time-js';
 export class ReviewSuggestedDeadlinesComponent implements OnInit {
 
   @Input()
-  private task: string;
-  private userTask: UserTask;
-  private studentName: string;
+  public task: string;
+  public userTask: UserTask;
+  public studentName: string;
 
   constructor(public dialogRef: MatDialogRef<ReviewSuggestedDeadlinesComponent>,
     private alertwindow: AlertWindowsComponent,

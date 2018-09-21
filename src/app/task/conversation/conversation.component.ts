@@ -18,13 +18,13 @@ export class ConversationComponent implements OnInit {
 
   @Input()
   task: Task;
-  private userTask: UserTask;
-  private messages: Message[];
-  private notExistingMessage: string;
-  private userMessage: string;
-  private recentMessages: Message[] = [];
-  private userId: number;
-  private minValueLength = 2;
+  public userTask: UserTask;
+  public messages: Message[];
+  public notExistingMessage: string;
+  public userMessage: string;
+  public recentMessages: Message[] = [];
+  public userId: number;
+  public minValueLength = 2;
 
   constructor(public dialogRef: MatDialogRef<ConversationComponent>,
     private  alertwindow: AlertWindowsComponent,

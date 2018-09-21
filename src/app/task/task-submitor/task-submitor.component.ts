@@ -16,11 +16,12 @@ import { AuthService } from '../../common/services/auth.service';
 export class TaskSubmitorComponent implements OnInit {
 
   approved = 'A';
+
   @Input()
-  private task: Task;
-  private userTask: UserTask;
-  private previousResult: string;
-  private exists: boolean;
+  public task: Task;
+  public userTask: UserTask;
+  public previousResult: string;
+  public exists: boolean;
 
   constructor(public dialogRef: MatDialogRef<TaskSubmitorComponent>,
     private  alertwindow: AlertWindowsComponent,

@@ -14,10 +14,11 @@ import { DateTime } from 'date-time-js';
   styleUrls: ['./suggest-deadline.component.css']
 })
 export class SuggestDeadlineComponent {
-  @Input() private task: string;
+  @Input()
+  public task: string;
 
-  private userTask: UserTask;
-  private previousProposeEndDate: DateTime;
+  public userTask: UserTask;
+  public previousProposeEndDate: DateTime;
 
   constructor(public dialogRef: MatDialogRef<SuggestDeadlineComponent>,
     private alertwindow: AlertWindowsComponent,

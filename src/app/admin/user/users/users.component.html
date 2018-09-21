@@ -9,7 +9,7 @@
     <!-- for sort -->
     <div class="flex-container ">
       <div class=" roles">
-        <div (click)="getType(null,role)" (click)="getByRole(paginator.PageSize, 0, -1)" [class.selected]="role === selectedType">
+        <div (click)="getType(null,selectedType)" (click)="getByRole(paginator.PageSize, 0, -1)" [class.selected]="selectedType && role == selectedType.Name">
           All
         </div>
         <div *ngFor="let role of roles" (click)="getByRole(paginator.PageSize, 0, role.Id)" (click)="getType(role.Name,role)" [class.selected]="role === selectedType">
