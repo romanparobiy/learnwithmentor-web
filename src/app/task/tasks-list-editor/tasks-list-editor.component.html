@@ -4,7 +4,7 @@
 <ng-template #elseBlock>
   <h3>Tasks not in the plan</h3>
 </ng-template>
-<mat-list>
+<mat-list class="tasksList">
   <mat-list-item *ngFor="let task of tasks">
     {{task.Name}} {{task.Description}}
     <div *ngIf="tasksInPlan; else elseBlock">
