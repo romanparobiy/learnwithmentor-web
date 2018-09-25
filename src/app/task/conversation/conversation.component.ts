@@ -27,24 +27,24 @@ export class ConversationComponent implements OnInit {
   public minValueLength = 2;
 
   constructor(public dialogRef: MatDialogRef<ConversationComponent>,
-    private  alertwindow: AlertWindowsComponent,
+    private alertwindow: AlertWindowsComponent,
     private taskService: TaskService,
     private authService: AuthService,
     private httpStatusCodeService: HttpStatusCodeService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.task = data.task;
-    this.userTask = data.userTask;
+    this.task = data.task || {};
+    this.userTask = data.userTask || {};
   }
 
   notExistingUserTask() {
     this.dialogRef.close();
-    this.alertwindow.openSnackBar('You are not asigned to this plan!' , 'Ok');
+    this.alertwindow.openSnackBar('You are not asigned to this plan!', 'Ok');
   }
 
   getUTMessages(userTaskId: number) {
     this.taskService.getMessages(userTaskId).subscribe(
       mes => {
-        if (mes.body.length === 0) {
+        if ((mes.body || []).length === 0) {
           this.notExistingMessage = 'Your conversation with mentor is empty. \n' +
             'Ask some questions, if you have any.';
         } else {
@@ -53,7 +53,7 @@ export class ConversationComponent implements OnInit {
       });
   }
 
-   onSendClick() {
+  onSendClick() {
     if (this.userMessage !== '' && this.userMessage) {
       const mes = { Text: this.userMessage, SenderId: this.userId };
       this.taskService.sendMessage(this.userTask.Id, mes as Message).subscribe(
@@ -62,7 +62,7 @@ export class ConversationComponent implements OnInit {
             this.recentMessages.push(mes as Message);
             this.notExistingMessage = '';
           } else {
-            this.alertwindow.openSnackBar('Your message is too long!' , 'Ok');
+            this.alertwindow.openSnackBar('Your message is too long!', 'Ok');
           }
         }
       );
@@ -85,6 +85,6 @@ export class ConversationComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.getUTMessages(this.userTask.Id);
+    this.getUTMessages(this.userTask.Id || this.task.Id);
   }
 }
