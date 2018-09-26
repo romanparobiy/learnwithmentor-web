@@ -120,10 +120,10 @@ export class SpecificPlanComponent implements OnInit {
     const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
     if (this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State !== States.inProgress) {
          this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = States.done;
+         this.taskService.updateUserTaskState(userTaskId, States.done).subscribe();
+         this.setUsertasks();
         }
-    this.taskService.updateUserTaskState(userTaskId, States.reset).subscribe();
-    this.setUsertasks();
-  }
+    }
 
   onResultClick(userTask: UserTask, task: Task) {
     const data = { userTask: userTask, task: task };

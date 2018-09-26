@@ -38,12 +38,12 @@
       </mat-form-field>
 
       <div class="flex-button">
-        <button mat-raised-button class="button-change" (click)="updateRole(id,role,name,surname)">Change</button>
+        <button mat-raised-button class="button-change" (click)="updateRole(role)">Change</button>
 
         <div>
-          <button mat-raised-button color="primary" (click)="changeState(id,state,false)">
+          <button mat-raised-button color="primary" (click)="changeState(false)">
             Unblock </button>
-          <button mat-raised-button color="primary" (click)="changeState(id,state,true)">
+          <button mat-raised-button color="primary" (click)="changeState(true)">
             Block </button>
         </div>
       </div>
@@ -58,7 +58,7 @@
         <ng-container matColumnDef="Check">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let element">
-            <mat-radio-button (click)="chooseUser(element.Id,element.Role,element.FirstName,element.LastName,element.Blocked)"></mat-radio-button>
+            <mat-checkbox [(ngModel)]="element.IsSelected"></mat-checkbox>
 
           </td>
         </ng-container>
