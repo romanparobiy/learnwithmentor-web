@@ -90,7 +90,7 @@ export class UsersComponent implements OnInit {
 
   updateRole(role: string) {
     const selectedUsers = this.users.filter(user => user.IsSelected);
-    if (role === null || selectedUsers.length == 0) {
+    if (role === null || selectedUsers.length === 0) {
       this.alertwindow.openSnackBar('Choose users and role!', 'Ok');
       return false;
     }
