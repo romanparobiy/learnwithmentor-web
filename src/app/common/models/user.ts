@@ -6,4 +6,5 @@ export class User {
     Role: string;
     Blocked: boolean;
     EmailConfirmed: boolean;
+    IsSelected: boolean;
 }
