@@ -67,15 +67,15 @@ export class UsersComponent implements OnInit {
   }
 
   changeState(isBlocked: boolean) {
-    let selectedUsers = this.users.filter(user => user.IsSelected);
+    const selectedUsers = this.users.filter(user => user.IsSelected);
 
-    if (selectedUsers.length == 0 || isBlocked == null) {
+    if (selectedUsers.length === 0 || isBlocked == null) {
       this.alertwindow.openSnackBar('Choose users!', 'Ok');
       return false;
     }
 
     this.dialogsService
-      .confirm('Confirm Dialog', "Are you sure you want to update users statuses?")
+      .confirm('Confirm Dialog', 'Are you sure you want to update users statuses?')
       .subscribe(res => {
         if (res) {
           selectedUsers.forEach(element => element.Blocked = isBlocked);
@@ -89,8 +89,8 @@ export class UsersComponent implements OnInit {
   }
 
   updateRole(role: string) {
-    let selectedUsers = this.users.filter(user => user.IsSelected);
-    if (role == null || selectedUsers.length == 0) {
+    const selectedUsers = this.users.filter(user => user.IsSelected);
+    if (role === null || selectedUsers.length == 0) {
       this.alertwindow.openSnackBar('Choose users and role!', 'Ok');
       return false;
     }
