@@ -19,7 +19,7 @@ export class TaskDetailComponent implements OnInit {
   constructor(public dialog: MatDialog, private authService: AuthService) { }
 
   ngOnInit() {
-    if (this.authService.isAdmin() || this.authService.isMentor() ) {
+    if (this.authService.isAdmin() || this.authService.isMentor()) {
       this.hasPermisionsToEdit = true;
     }
   }
@@ -33,7 +33,7 @@ export class TaskDetailComponent implements OnInit {
   openConversationDialog(): void {
     const dialogRef = this.dialog.open(ConversationComponent, {
       width: '600px',
-      data: this.task
+      data: { task: this.task, userTask: this }
     });
   }
 
