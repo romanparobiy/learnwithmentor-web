@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule , ErrorHandler  } from '@angular/core';
 import { UserService } from './common/services/user.service';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './admin/user/users/users.component';
@@ -80,6 +80,16 @@ import { SuggestDeadlineComponent } from './specific-group/suggest-deadline/sugg
 import { ReviewSuggestedDeadlinesComponent } from './specific-group/review-suggested-deadlines/review-suggested-deadlines.component';
 import { CustomPaginatorComponent } from './custom-paginator/custom-paginator.component';
 
+import * as Raven from 'raven-js';
+Raven
+  .config('https://351205e7df8743abbfbf6a26e31848b4@sentry.io/1283915')
+  .install();
+
+export class RavenErrorHandler implements ErrorHandler {
+  handleError(err: any): void {
+    Raven.captureException(err.originalError);
+  }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -187,9 +197,10 @@ import { CustomPaginatorComponent } from './custom-paginator/custom-paginator.co
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }],
+    },
+    { provide: ErrorHandler, useClass: RavenErrorHandler }
+    ],
   bootstrap: [AppComponent],
 
 })
-
 export class AppModule { }
