@@ -198,8 +198,9 @@ export class RavenErrorHandler implements ErrorHandler {
       useClass: AuthInterceptor,
       multi: true
     },
-    { provide: ErrorHandler, useClass: RavenErrorHandler }
-    ],
+    { provide: ErrorHandler, 
+      useClass: RavenErrorHandler 
+    }],
   bootstrap: [AppComponent],
 
 })
