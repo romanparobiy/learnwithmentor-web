@@ -20,7 +20,7 @@ export class TaskDetailComponent implements OnInit {
   constructor(public dialog: MatDialog, private authService: AuthService) { }
 
   ngOnInit() {
-    if (this.authService.isAdmin() || this.authService.isMentor()|| this.authService.isStudent()) {
+    if (this.authService.isAdmin() || this.authService.isMentor() || this.authService.isStudent()) {
       this.hasPermisionsToComment = true;
     }
     if (this.authService.isAdmin() || this.authService.isMentor()) {
