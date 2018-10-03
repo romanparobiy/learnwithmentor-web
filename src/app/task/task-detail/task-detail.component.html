@@ -29,10 +29,7 @@
         <button *ngIf="hasPermisionsToEdit"  mat-button (click)="openEditDialog()">
           Edit
         </button>
-        <button *ngIf="hasPermisionsToEdit" mat-button (click)="openSubmitDialog()">
-          Submit
-        </button>
-        <button *ngIf="hasPermisionsToEdit" mat-button (click)="openConversationDialog()">
+        <button *ngIf="hasPermisionsToComment" mat-button (click)="openConversationDialog()">
           Conversation
         </button>
       </mat-card-actions>
