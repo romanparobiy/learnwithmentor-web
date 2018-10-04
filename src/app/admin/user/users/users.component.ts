@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../../common/models/user';
 import { Role } from '../../../common/models/role';
 import { UserService } from '../../../common/services/user.service';
-import { MatPaginator, MatTableDataSource, MatRadioButton, PageEvent } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatRadioButton, PageEvent, MatCheckboxModule } from '@angular/material';
 import { Observable, Subject, of } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
@@ -27,18 +27,11 @@ export class UsersComponent implements OnInit {
   roles: Role[];
   users: User[];
   paginator: Pagination<User>;
-  name: string;
-  surname: string;
   role: string;
-  state: boolean;
-  newState: boolean;
-  id: number;
-  forMessage: string;
   selectedType: Role;
   selectedState: boolean;
   roleName: string = null;
   lastArgument: any;
-  public result: any;
   lastFunction: (pageSize: number, pageNumber: number, arg: any) => void;
   term: string;
   dataSource = new MatTableDataSource<User>(this.users);
@@ -48,13 +41,6 @@ export class UsersComponent implements OnInit {
     this.selectedType = type;
     this.selectedState = null;
     return this.roleName = roleName;
-  }
-
-  chooseUser(id: number, role: string, name: string, surname: string, state: boolean) {
-    this.surname = surname;
-    this.name = name;
-    this.state = state;
-    this.id = id;
   }
 
   getUsersByState(pageSize: number, pageNumber: number, state: boolean) {
@@ -80,57 +66,44 @@ export class UsersComponent implements OnInit {
     return this.role = role;
   }
 
-  changeState(id: number, state: boolean, newState) {
-    if (this.id == null || state == null) {
-      this.alertwindow.openSnackBar('Choose user!', 'Ok');
-      return false;
-    }
-    if (newState) {
-      this.forMessage = ' block ';
-    }
-    if (!newState) {
-      this.forMessage = ' unblock ';
-    }
-    if (this.state === newState) {
-      this.alertwindow.openSnackBar('User ' + this.name + ' ' + this.surname + ' already' + this.forMessage, 'Ok');
-      return false;
-    }
-    const user = { Blocked: newState, Id: this.id };
-    this.dialogsService
-      .confirm('Confirm Dialog', 'Are sure you want to ' + this.forMessage + ' user : ' + this.name + ' ' + this.surname + '  ?')
-      .subscribe(res => {
-        this.result = res;
+  changeState(isBlocked: boolean) {
+    const selectedUsers = this.users.filter(user => user.IsSelected);
 
-        if (this.result) {
-          this.userService.updateUser(user as User).subscribe();
-          this.users.forEach(element => {
-            if (element.Id === id) {
-              element.Blocked = newState;
-            }
-          });
-          this.state = newState;
+    if (selectedUsers.length === 0 || isBlocked == null) {
+      this.alertwindow.openSnackBar('Choose users!', 'Ok');
+      return false;
+    }
+
+    this.dialogsService
+      .confirm('Confirm Dialog', 'Are you sure you want to update users statuses?')
+      .subscribe(res => {
+        if (res) {
+          selectedUsers.forEach(element => element.Blocked = isBlocked);
+          this.userService.updateMultipleUser(selectedUsers)
+            .subscribe(respons => {
+              selectedUsers.forEach(element => element.IsSelected = false);
+            });
           return true;
         }
       });
   }
 
-  updateRole(id: number, role: string, name: string, surname: string) {
-    if (role == null || id == null) {
-      this.alertwindow.openSnackBar('Choose role!', 'Ok');
+  updateRole(role: string) {
+    const selectedUsers = this.users.filter(user => user.IsSelected);
+    if (role === null || selectedUsers.length === 0) {
+      this.alertwindow.openSnackBar('Choose users and role!', 'Ok');
       return false;
     }
     this.dialogsService
-      .confirm('Confirm Dialog', 'Are sure you want to update role for user  ' + name + ' ' + surname + ' on role "' + role + '" ?')
+      .confirm('Confirm Dialog', 'Are sure you want to update role for selected users ?')
       .subscribe(res => {
-        this.result = res;
-        if (this.result) {
-          const user = { Role: role, Id: id };
-          this.userService.updateUser(user as User).subscribe();
-          this.users.forEach(element => {
-            if (element.Id === id) {
-              element.Role = role;
-            }
-          });
+        if (res) {
+          selectedUsers.forEach(element => element.Role = role);
+          this.userService.updateMultipleUser(selectedUsers)
+            .subscribe(respons => {
+              selectedUsers.forEach(element => element.IsSelected = false);
+            });
+          return true;
         }
       });
   }
@@ -149,6 +122,7 @@ export class UsersComponent implements OnInit {
       this.lastArgument = id;
     }
   }
+
   setPage(pageSize = 10, pageNumber = 0) {
     this.userService.getPage(pageSize, pageNumber).subscribe(
       paginator => {

@@ -23,7 +23,7 @@ import { ReviewSuggestedDeadlinesComponent } from '../review-suggested-deadlines
 import { Section } from '../../common/models/sections';
 import { MatDialog } from '@angular/material';
 import { DateTime } from 'date-time-js';
-import {States} from './states';
+import { States } from './states';
 
 export class UsersWithTasks {
   user: UserWithImage;
@@ -119,15 +119,16 @@ export class SpecificPlanComponent implements OnInit {
   reset(sectionId, taskId, selectedUser: number) {
     const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
     if (this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State !== States.inProgress) {
-         this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = States.done;
-        }
-    this.taskService.updateUserTaskState(userTaskId, States.reset).subscribe();
-    this.setUsertasks();
+      this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = States.done;
+      this.taskService.updateUserTaskState(userTaskId, States.done).subscribe();
+      this.setUsertasks();
+    }
   }
+
 
   onResultClick(userTask: UserTask, task: Task) {
     const data = { userTask: userTask, task: task };
-    const dialogRef = this.dialog.open(TaskSubmitorComponent, {
+    this.dialog.open(TaskSubmitorComponent, {
       data: data,
       width: '600px'
     });
@@ -135,7 +136,7 @@ export class SpecificPlanComponent implements OnInit {
 
   onConversationClick(userTask: UserTask, task: Task) {
     const data = { userTask: userTask, task: task };
-    const dialogRef = this.dialog.open(ConversationComponent, {
+    this.dialog.open(ConversationComponent, {
       data: data,
       width: '600px'
     });

@@ -73,6 +73,12 @@ export class UserService {
     );
   }
 
+  updateMultipleUser(users: User[]): Observable<HttpResponse<any>> {
+    return this.http.put(`${this.url}/update-multiple`, users, { observe: 'response' }).pipe(
+      catchError(r => of(r))
+    );
+  }
+
   registerUser(register: Register) {
     const body: Register = {
       Password: register.Password,
