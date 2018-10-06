@@ -56,9 +56,11 @@
 
         <!-- check column -->
         <ng-container matColumnDef="Check">
-          <th mat-header-cell *matHeaderCellDef> </th>
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox [(ngModel)]="selectedAll" (change)="selectAll()"></mat-checkbox>
+          </th>
           <td mat-cell *matCellDef="let element">
-            <mat-checkbox [(ngModel)]="element.IsSelected"></mat-checkbox>
+            <mat-checkbox [(ngModel)]="element.IsSelected" (change)="checkIfAllSelected()"></mat-checkbox>
 
           </td>
         </ng-container>
