@@ -31,7 +31,7 @@ export class ConversationComponent implements OnInit {
   public userId: number;
   public minValueLength = 2;
   public userTaskId: number;
-  public count:number = 0;
+  public count = 0;
 
   constructor(public dialogRef: MatDialogRef<ConversationComponent>,
     private alertwindow: AlertWindowsComponent,
@@ -44,17 +44,15 @@ export class ConversationComponent implements OnInit {
     this.userTask = data.userTask || {};
     this.userTaskId = data.task.Id || {};
   }
-   action(event:any,i:number){
-     if (this.messages[i].SenderId != this.authService.getUserId() && this.count > this.messages.length){
-      if(!this.messages[i].IsRead)
-        {
+   action(event: any, i: number) {
+     if (this.messages[i].SenderId !== this.authService.getUserId() && this.count > this.messages.length) {
+      if (!this.messages[i].IsRead) {
           this.messages[i].IsRead = true;
-            this.taskService.updateIsReadState(this.messages[i].UserTaskId,this.messages[i]).subscribe();
-        }
+          this.taskService.updateIsReadState(this.messages[i].UserTaskId, this.messages[i]).subscribe();
       }
-      this.count++;
     }
-
+      this.count++;
+  }
 
   notExistingUserTask() {
     this.dialogRef.close();
@@ -70,9 +68,9 @@ export class ConversationComponent implements OnInit {
         CreatorFullName: this.authService.getUserFullName(),
         CreateDate: new Date().toISOString(),
         ModDate: new Date().toISOString(),
-        
+
       };
- 
+
     } else {
       this.taskService.getMessages(userTaskId).subscribe(
         mes => {
@@ -81,8 +79,8 @@ export class ConversationComponent implements OnInit {
               'Ask some questions, if you have any.';
             } else {
             this.messages = mes.body;
-            for (let entry of this.messages) { 
-                console.log(entry.IsRead); 
+            for (const entry of this.messages) {
+              console.log(entry.IsRead);
               }
             }
         });
