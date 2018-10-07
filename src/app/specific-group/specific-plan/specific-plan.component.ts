@@ -102,7 +102,7 @@ export class SpecificPlanComponent implements OnInit {
     return 'Done';
   }
 
-  approve(sectionId, taskId, selectedUser: number) {
+  approve(sectionId, taskId, selectedUser: number){
     const userTaskId = this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].Id;
     this.sections[sectionId].Content.UsersTasks[taskId].UserTasks[selectedUser].State = States.approved;
     this.taskService.updateUserTaskState(userTaskId, States.approved).subscribe();

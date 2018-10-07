@@ -79,6 +79,9 @@ import { EmailNotConfirmedComponent } from './email-not-confirmed/email-not-conf
 import { SuggestDeadlineComponent } from './specific-group/suggest-deadline/suggest-deadline.component';
 import { ReviewSuggestedDeadlinesComponent } from './specific-group/review-suggested-deadlines/review-suggested-deadlines.component';
 import { CustomPaginatorComponent } from './custom-paginator/custom-paginator.component';
+import { InViewportModule } from 'ng-in-viewport';
+import 'intersection-observer';
+
 
 import * as Raven from 'raven-js';
 Raven
@@ -168,7 +171,8 @@ export class RavenErrorHandler implements ErrorHandler {
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    InViewportModule
     ],
 
   entryComponents: [TaskEditorComponent,
