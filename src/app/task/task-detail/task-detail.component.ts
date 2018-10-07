@@ -15,11 +15,15 @@ export class TaskDetailComponent implements OnInit {
 
   @Input()
   task: Task;
+  hasPermisionsToComment = false;
   hasPermisionsToEdit = false;
   constructor(public dialog: MatDialog, private authService: AuthService) { }
 
   ngOnInit() {
-    if (this.authService.isAdmin() || this.authService.isMentor() ) {
+    if (this.authService.isAdmin() || this.authService.isMentor() || this.authService.isStudent()) {
+      this.hasPermisionsToComment = true;
+    }
+    if (this.authService.isAdmin() || this.authService.isMentor()) {
       this.hasPermisionsToEdit = true;
     }
   }
@@ -33,14 +37,7 @@ export class TaskDetailComponent implements OnInit {
   openConversationDialog(): void {
     const dialogRef = this.dialog.open(ConversationComponent, {
       width: '600px',
-      data: this.task
-    });
-  }
-
-  openSubmitDialog(): void {
-    const dialogRef = this.dialog.open(TaskSubmitorComponent, {
-      width: '600px',
-      data: this.task
+      data: { task: this.task, userTask: this }
     });
   }
 }
