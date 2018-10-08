@@ -43,6 +43,7 @@ import { MaterialModule } from './material.module';
 import { PlansComponent } from './plan/plans/plans.component';
 import { PlanDetailsComponent } from './plan/plan-details/plan-details.component';
 import { TaskSubmitorComponent } from './task/task-submitor/task-submitor.component';
+import { TaskReaderComponent } from './task/task-reader/task-reader.component';
 import { FormsModule } from '@angular/forms';
 import { ConversationComponent } from './task/conversation/conversation.component';
 import { AboutPageComponent } from './main-page/about-page/about-page.component';
@@ -111,6 +112,7 @@ export class RavenErrorHandler implements ErrorHandler {
     PlansComponent,
     PlanDetailsComponent,
     TaskSubmitorComponent,
+    TaskReaderComponent,
     ConversationComponent,
     SpecificGroupComponent,
     AlertWindowsComponent,
@@ -175,6 +177,7 @@ export class RavenErrorHandler implements ErrorHandler {
     TaskCreatorComponent,
     ConfirmDialogComponent,
     TaskSubmitorComponent,
+    TaskReaderComponent,
     ConversationComponent,
     SuggestDeadlineComponent,
     SigninComponent,

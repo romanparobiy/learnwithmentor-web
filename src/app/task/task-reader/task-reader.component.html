@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Student result for {{task.Name}}</h2>
+<mat-dialog-content>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Task description:</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{task.Description}}</p>
+    </mat-card-content>
+  </mat-card>
+  <hr/>
+      <p>{{userTask.Result}}</p>
+</mat-dialog-content>
+<mat-dialog-actions>  
+  <button mat-raised-button (click)="onCloseClick()">Close</button>
+</mat-dialog-actions>

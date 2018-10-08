@@ -24,6 +24,7 @@ import { Section } from '../../common/models/sections';
 import { MatDialog } from '@angular/material';
 import { DateTime } from 'date-time-js';
 import { States } from './states';
+import { TaskReaderComponent } from '../../task/task-reader/task-reader.component';
 
 export class UsersWithTasks {
   user: UserWithImage;
@@ -51,6 +52,8 @@ export class SpecificPlanComponent implements OnInit {
   isUserSelected = false;
   selectedUser = 0;
   info: string;
+  buttonName: string;
+
   constructor(public taskService: TaskService,
     private userService: UserService,
     public dialog: MatDialog,
@@ -128,10 +131,17 @@ export class SpecificPlanComponent implements OnInit {
 
   onResultClick(userTask: UserTask, task: Task) {
     const data = { userTask: userTask, task: task };
-    this.dialog.open(TaskSubmitorComponent, {
-      data: data,
-      width: '600px'
-    });
+    if (this.is_student) {
+      this.dialog.open(TaskSubmitorComponent, {
+        data: data,
+        width: '600px'
+      });
+    } else {
+      this.dialog.open(TaskReaderComponent, {
+        data: data,
+        width: '600px'
+      });
+    }
   }
 
   onConversationClick(userTask: UserTask, task: Task) {
@@ -171,6 +181,7 @@ export class SpecificPlanComponent implements OnInit {
         this.sections = section;
         if (!this.auth.isStudent()) {
           this.is_student = false;
+          this.buttonName = 'Look Result';
           this.groupservice.getGroupUsersWithImage(group_id).subscribe(
             result => {
               this.getUsersWithPictures(result);
@@ -178,6 +189,7 @@ export class SpecificPlanComponent implements OnInit {
           );
         } else {
           this.is_student = true;
+          this.buttonName = 'Submit Result';
           this.userService.getUser().subscribe(u => {
             const userWithImage = this.toUserWithImage(u);
             this.getUserWithPictures(userWithImage);
