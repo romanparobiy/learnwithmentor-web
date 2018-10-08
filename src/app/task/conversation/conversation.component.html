@@ -10,7 +10,7 @@
       </mat-card-header>
       <mat-card-content inViewport
       [inViewportOptions]="{ threshold: [0] }"
-      (inViewportAction)="action($event,i)">
+      (inViewportAction)="ChangeOnViewPort($event,i)">
           <p>{{message.Text}}</p>
           <caption class = "seen" *ngIf = "messages[i].IsRead">Seen</caption>
         </mat-card-content>

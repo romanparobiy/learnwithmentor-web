@@ -44,7 +44,7 @@ export class ConversationComponent implements OnInit {
     this.userTask = data.userTask || {};
     this.userTaskId = data.task.Id || {};
   }
-   action(event: any, i: number) {
+   ChangeOnViewPort(event: any, i: number) {
      if (this.messages[i].SenderId !== this.authService.getUserId() && this.count > this.messages.length) {
       if (!this.messages[i].IsRead) {
           this.messages[i].IsRead = true;
@@ -79,9 +79,6 @@ export class ConversationComponent implements OnInit {
               'Ask some questions, if you have any.';
             } else {
             this.messages = mes.body;
-            for (const entry of this.messages) {
-              console.log(entry.IsRead);
-              }
             }
         });
       }
