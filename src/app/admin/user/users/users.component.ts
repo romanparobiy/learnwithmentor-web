@@ -83,6 +83,9 @@ export class UsersComponent implements OnInit {
           this.userService.updateMultipleUser(selectedUsers)
             .subscribe(respons => {
               selectedUsers.forEach(element => element.IsSelected = false);
+              if (this.selectedAll === true) {
+                this.selectedAll = false;
+              }
             });
           return true;
         }
@@ -103,6 +106,9 @@ export class UsersComponent implements OnInit {
           this.userService.updateMultipleUser(selectedUsers)
             .subscribe(respons => {
               selectedUsers.forEach(element => element.IsSelected = false);
+              if (this.selectedAll === true) {
+                this.selectedAll = false;
+              }
             });
           return true;
         }
