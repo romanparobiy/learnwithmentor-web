@@ -31,7 +31,7 @@ export class ConversationComponent implements OnInit {
   public userId: number;
   public minValueLength = 2;
   public userTaskId: number;
-  public count = 0;
+  public countForMessages = 0;
 
   constructor(public dialogRef: MatDialogRef<ConversationComponent>,
     private alertwindow: AlertWindowsComponent,
@@ -45,13 +45,13 @@ export class ConversationComponent implements OnInit {
     this.userTaskId = data.task.Id || {};
   }
    ChangeOnViewPort(event: any, i: number) {
-     if (this.messages[i].SenderId !== this.authService.getUserId() && this.count > this.messages.length) {
+     if (this.messages[i].SenderId !== this.authService.getUserId() && this.countForMessages > this.messages.length) {
       if (!this.messages[i].IsRead) {
           this.messages[i].IsRead = true;
           this.taskService.updateIsReadState(this.messages[i].UserTaskId, this.messages[i]).subscribe();
       }
     }
-      this.count++;
+      this.countForMessages++;
   }
 
   notExistingUserTask() {
