@@ -12,7 +12,6 @@ import { CommentService } from '../../common/services/comment.service';
 import { Comment } from '../../common/models/comment';
 import { InViewportModule } from 'ng-in-viewport';
 
-
 @Component({
   selector: 'app-conversation',
   templateUrl: './conversation.component.html',
@@ -32,7 +31,6 @@ export class ConversationComponent implements OnInit {
   public minValueLength = 2;
   public userTaskId: number;
   public countForMessages = 0;
-
 
   constructor(public dialogRef: MatDialogRef<ConversationComponent>,
     private alertwindow: AlertWindowsComponent,
@@ -70,7 +68,6 @@ export class ConversationComponent implements OnInit {
         CreateDate: new Date().toISOString(),
         ModDate: new Date().toISOString(),
 
-
       };
 
     } else {
@@ -84,7 +81,6 @@ export class ConversationComponent implements OnInit {
             }
         });
       }
-
   }
 
   onSendClick() {

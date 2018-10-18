@@ -96,16 +96,6 @@ export class RavenErrorHandler implements ErrorHandler {
   }
 }
 
-import * as Raven from 'raven-js';
-Raven
-  .config('https://351205e7df8743abbfbf6a26e31848b4@sentry.io/1283915')
-  .install();
-
-export class RavenErrorHandler implements ErrorHandler {
-  handleError(err: any): void {
-    Raven.captureException(err.originalError);
-  }
-}
 @NgModule({
   declarations: [
     AppComponent,

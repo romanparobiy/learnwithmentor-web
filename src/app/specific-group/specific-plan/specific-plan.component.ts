@@ -26,7 +26,6 @@ import { DateTime } from 'date-time-js';
 import { States } from './states';
 import { TaskReaderComponent } from '../../task/task-reader/task-reader.component';
 
-
 export class UsersWithTasks {
   user: UserWithImage;
   image;

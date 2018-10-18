@@ -109,7 +109,6 @@ export class UsersComponent implements OnInit {
               if (this.selectedAll === true) {
                 this.selectedAll = false;
               }
-
             });
           return true;
         }
