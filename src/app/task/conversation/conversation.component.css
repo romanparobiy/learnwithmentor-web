@@ -32,3 +32,8 @@
 .disable {
   background: #ccc;
 }
+
+.seen {
+  float: right;
+  font-size: 80%;
+}

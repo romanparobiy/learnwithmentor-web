@@ -6,4 +6,5 @@ export class Comment {
     CreatorLastName: string;
     CreateDate: DateTimeFormat;
     ModDate: DateTimeFormat;
+    isRead: boolean;
 }

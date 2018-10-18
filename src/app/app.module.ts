@@ -43,6 +43,7 @@ import { MaterialModule } from './material.module';
 import { PlansComponent } from './plan/plans/plans.component';
 import { PlanDetailsComponent } from './plan/plan-details/plan-details.component';
 import { TaskSubmitorComponent } from './task/task-submitor/task-submitor.component';
+import { TaskReaderComponent } from './task/task-reader/task-reader.component';
 import { FormsModule } from '@angular/forms';
 import { ConversationComponent } from './task/conversation/conversation.component';
 import { AboutPageComponent } from './main-page/about-page/about-page.component';
@@ -79,6 +80,21 @@ import { EmailNotConfirmedComponent } from './email-not-confirmed/email-not-conf
 import { SuggestDeadlineComponent } from './specific-group/suggest-deadline/suggest-deadline.component';
 import { ReviewSuggestedDeadlinesComponent } from './specific-group/review-suggested-deadlines/review-suggested-deadlines.component';
 import { CustomPaginatorComponent } from './custom-paginator/custom-paginator.component';
+import { InViewportModule } from 'ng-in-viewport';
+import 'intersection-observer';
+
+
+import * as Raven from 'raven-js';
+Raven
+  .config('https://351205e7df8743abbfbf6a26e31848b4@sentry.io/1283915')
+  .install();
+
+export class RavenErrorHandler implements ErrorHandler {
+  handleError(err: any): void {
+    Raven.captureException(err.originalError);
+    Raven.showReportDialog();
+  }
+}
 
 import * as Raven from 'raven-js';
 Raven
@@ -111,6 +127,7 @@ export class RavenErrorHandler implements ErrorHandler {
     PlansComponent,
     PlanDetailsComponent,
     TaskSubmitorComponent,
+    TaskReaderComponent,
     ConversationComponent,
     SpecificGroupComponent,
     AlertWindowsComponent,
@@ -168,13 +185,15 @@ export class RavenErrorHandler implements ErrorHandler {
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    InViewportModule
     ],
 
   entryComponents: [TaskEditorComponent,
     TaskCreatorComponent,
     ConfirmDialogComponent,
     TaskSubmitorComponent,
+    TaskReaderComponent,
     ConversationComponent,
     SuggestDeadlineComponent,
     SigninComponent,

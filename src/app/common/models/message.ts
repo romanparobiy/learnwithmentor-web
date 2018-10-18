@@ -5,4 +5,5 @@ export class Message {
     SenderName: string;
     Text: string;
     SendTime: Date;
+    IsRead: boolean;
 }

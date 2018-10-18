@@ -110,6 +110,7 @@ export class TaskService {
     return this.http.get<UserTask[]>(request).pipe(
       catchError(val => of(val)));
   }
+
   createTask(task: Task, planId?: number): Observable<any> {
     let link = '';
     if (planId == null) {
@@ -143,6 +144,12 @@ export class TaskService {
   sendMessage(userTaskId: number, message: Message): Observable<any> {
     const link = `${this.url}task/userTask/${userTaskId}/messages`;
     return this.http.post<Message>(link, message, { observe: 'response' }).pipe(
+      catchError(val => of(val)));
+  }
+
+  updateIsReadState(userTaskId: number, message: Message): Observable<any> {
+    const link = `${this.url}task/userTask/${userTaskId}/messages/isRead`;
+    return this.http.put<Message>(link, message, httpOptions).pipe(
       catchError(val => of(val)));
   }
 

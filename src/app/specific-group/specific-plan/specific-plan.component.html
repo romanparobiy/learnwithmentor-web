@@ -36,7 +36,7 @@
             </mat-expansion-panel-header>
             <div class="buttons" *ngIf="section.Content.UsersTasks">
               <div class="result">
-                <button mat-raised-button class="button-change" (click)="onResultClick(section.Content.UsersTasks[i].UserTasks[selectedUser], section.Content.Tasks[i])">Result</button>
+                <button mat-raised-button class="button-change" (click)="onResultClick(section.Content.UsersTasks[i].UserTasks[selectedUser], section.Content.Tasks[i])">{{buttonName}}</button>
                 <button mat-raised-button class="button-change" (click)="onConversationClick(section.Content.UsersTasks[i].UserTasks[selectedUser], section.Content.Tasks[i])">Conversation</button>
               </div>
               <div>

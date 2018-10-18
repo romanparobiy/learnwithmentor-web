@@ -2,11 +2,13 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Task } from '../../common/models/task';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskService } from '../../common/services/task.service';
+import { ImageService } from '../../common/services/image.service';
 import { UserTask } from '../../common/models/userTask';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
 import { DialogsService } from '../../components/dialogs/dialogs.service';
 import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 import { AuthService } from '../../common/services/auth.service';
+import { States } from './../../specific-group/specific-plan/states';
 
 @Component({
   selector: 'app-task-submitor',
@@ -14,8 +16,6 @@ import { AuthService } from '../../common/services/auth.service';
   styleUrls: ['./task-submitor.component.css']
 })
 export class TaskSubmitorComponent implements OnInit {
-
-  approved = 'A';
 
   @Input()
   public task: Task;
@@ -27,12 +27,13 @@ export class TaskSubmitorComponent implements OnInit {
     private  alertwindow: AlertWindowsComponent,
     private dialogsService: DialogsService,
     private taskService: TaskService,
+    private imageService: ImageService,
     private authService: AuthService,
     private httpStatusCodeService: HttpStatusCodeService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.userTask = data.userTask;
-    this.task = data.task;
-    this.previousResult = data.userTask.Result;
+    this.userTask = data.userTask || {};
+    this.task = data.task || {};
+    this.previousResult = data.userTask.Result || {};
   }
 
   onCancelClick() {
@@ -54,12 +55,15 @@ export class TaskSubmitorComponent implements OnInit {
   }
 
   isTaskApproved() {
-    return this.userTask.State === this.approved;
+    return this.userTask.State === States.approved;
   }
 
   saveChanges() {
+    this.userTask.State = States.done;
+    this.userTask.Image = this.imageService.setImage(States.done);
     const utask = { Id: this.userTask.Id, Result: this.userTask.Result };
     this.taskService.updateUserTaskResult(utask as UserTask).subscribe(ut => ut.headers);
+    this.taskService.updateUserTaskState(this.userTask.Id, this.userTask.State).subscribe();
   }
 
   notExisting() {

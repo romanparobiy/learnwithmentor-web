@@ -1,14 +1,19 @@
 <h2 mat-dialog-title>Your conversation about {{task.Name}}</h2>
 <mat-dialog-content>
-  <div class="conversation-history" #conversation [scrollTop]="conversation.scrollHeight">
+  <div class="conversation-history" #conversation [scrollTop]="conversation.scrollHeight" >
     <h3 class="not-existing" *ngIf="notExistingMessage">{{notExistingMessage}}</h3>
-    <mat-card *ngFor="let message of messages">
+    <mat-card  *ngFor="let message of messages;index as i" >
+      
       <mat-card-header>
-        <mat-card-title>Written by {{message.SenderName}} at {{message.SendTime | date:'yyyy-MM-dd'}}</mat-card-title>
+        <mat-card-title >Written by {{message.SenderName}} at {{message.SendTime | date:'yyyy-MM-dd'}}</mat-card-title>
+       
       </mat-card-header>
-      <mat-card-content>
-        <p>{{message.Text}}</p>
-      </mat-card-content>
+      <mat-card-content inViewport
+      [inViewportOptions]="{ threshold: [0] }"
+      (inViewportAction)="ChangeOnViewPort($event,i)">
+          <p>{{message.Text}}</p>
+          <caption class = "seen" *ngIf = "messages[i].IsRead">Seen</caption>
+        </mat-card-content>
     </mat-card>
     <mat-card *ngFor="let m of recentMessages">
         <mat-card-header>

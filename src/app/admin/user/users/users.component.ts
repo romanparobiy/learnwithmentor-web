@@ -34,6 +34,7 @@ export class UsersComponent implements OnInit {
   lastArgument: any;
   lastFunction: (pageSize: number, pageNumber: number, arg: any) => void;
   term: string;
+  selectedAll: any;
   dataSource = new MatTableDataSource<User>(this.users);
   private searchTerms = new Subject<string>();
 
@@ -82,6 +83,9 @@ export class UsersComponent implements OnInit {
           this.userService.updateMultipleUser(selectedUsers)
             .subscribe(respons => {
               selectedUsers.forEach(element => element.IsSelected = false);
+              if (this.selectedAll === true) {
+                this.selectedAll = false;
+              }
             });
           return true;
         }
@@ -102,6 +106,10 @@ export class UsersComponent implements OnInit {
           this.userService.updateMultipleUser(selectedUsers)
             .subscribe(respons => {
               selectedUsers.forEach(element => element.IsSelected = false);
+              if (this.selectedAll === true) {
+                this.selectedAll = false;
+              }
+
             });
           return true;
         }
@@ -156,5 +164,17 @@ export class UsersComponent implements OnInit {
         this.users = this.paginator.Items;
       });
     }
+  }
+
+  selectAll() {
+    this.users.forEach(element => {
+      element.IsSelected = this.selectedAll;
+    });
+  }
+
+  checkIfAllSelected() {
+    this.selectedAll = this.users.every(function (item: any) {
+      return item.IsSelected === true;
+    });
   }
 }
