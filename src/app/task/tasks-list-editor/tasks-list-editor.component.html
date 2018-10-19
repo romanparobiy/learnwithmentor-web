@@ -5,15 +5,15 @@
   <h3>Tasks not in the plan</h3>
 </ng-template>
 <mat-list class="tasksList">
-  <mat-list-item *ngFor="let task of tasks">
+  <mat-list-item class="task" *ngFor="let task of tasks">
     {{task.Name}} {{task.Description}}
-    <div *ngIf="tasksInPlan; else elseBlock">
-      <button mat-button (click)="onChange(task)">
+    <div class="buttonContainer" *ngIf="tasksInPlan; else elseBlock">
+      <button class="button" mat-button (click)="onChange(task)">
         Delete
       </button>
     </div>
     <ng-template #elseBlock>
-      <button mat-button (click)="onChange(task)">
+      <button class="button" mat-button (click)="onChange(task)">
         Add
       </button>
     </ng-template>
