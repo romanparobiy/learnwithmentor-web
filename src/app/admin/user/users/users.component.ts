@@ -19,10 +19,12 @@ import { AuthService } from '../../../common/services/auth.service';
 })
 
 export class UsersComponent implements OnInit {
-
-  constructor(private userService: UserService, private alertwindow: AlertWindowsComponent, private dialogsService: DialogsService,private authService: AuthService,) {
+  constructor (
+    private userService: UserService,
+    private alertwindow: AlertWindowsComponent,
+    private dialogsService: DialogsService,
+    private authService: AuthService) {
   }
-
   displayedColumns = ['Check', 'FirstName', 'LastName', 'Role', 'Blocked', 'Action'];
   allUsers = -1;
   roles: Role[];
@@ -75,12 +77,12 @@ export class UsersComponent implements OnInit {
       this.alertwindow.openSnackBar('Choose users!', 'Ok');
       return false;
     }
-    for(let numberOfUser:number = 0; numberOfUser < selectedUsers.length; numberOfUser++ ) {
-      if(this.authService.getUserId() == selectedUsers[numberOfUser].Id) {
-        this.alertwindow.openSnackBar("You can't block yourself!","Ok"); 
+
+    for (let numberOfUser = 0; numberOfUser < selectedUsers.length; numberOfUser++ ) {
+      if (this.authService.getUserId() === selectedUsers[numberOfUser].Id) {
+        this.alertwindow.openSnackBar('You can\'t block yourself!', 'Ok');
         return false;
       }
-
     }
 
     this.dialogsService
