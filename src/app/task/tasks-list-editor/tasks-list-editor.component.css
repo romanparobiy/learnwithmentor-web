@@ -1,3 +1,13 @@
 .tasksList .mat-list-item {
     height: auto;
 }
+
+.task {
+    padding-bottom: 10px;
+    padding-right: 0px;
+    
+}
+
+.buttonContainer {
+    margin: 0 0 0 auto;
+}

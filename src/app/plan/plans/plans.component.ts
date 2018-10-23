@@ -8,12 +8,10 @@ import { PlanService } from '../../common/services/plan.service';
   styleUrls: ['./plans.component.css']
 })
 export class PlansComponent implements OnInit {
-
   plans: Plan[];
   constructor(private planService: PlanService) {
     planService.getPlans().subscribe(x => this.plans = x);
   }
-
   ngOnInit() {
   }
 }
