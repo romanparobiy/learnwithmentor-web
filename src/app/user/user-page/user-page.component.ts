@@ -63,11 +63,11 @@ export class UserPageComponent implements OnInit {
             }
           );
 
-          if  (this.userData.Role=='Admin' || this.userData.Role=='Mentor')
+          if  (this.userData.Role === 'Admin' || this.userData.Role === 'Mentor')
           {
             this.statisticsLoading = false;
           }
-          else{
+          else {
             this.userService.getStatistics().subscribe(
               r => {
                 if (this.httpStatusCodeService.isOk(r.status)) {
