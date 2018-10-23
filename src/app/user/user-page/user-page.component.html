@@ -24,25 +24,27 @@
         </div>
     </div>
 </div>
-<h2>Tasks statistics</h2>
-<div *ngIf="statisticsLoading" class="tasks-spinner-container">
-    <mat-spinner class="spinner-margins"></mat-spinner>
-</div>
-<div class="stats" *ngIf="userStats">
-    <div class="states-first">
-        <h3>In progress</h3>
-        <p>{{userStats.InProgressNumber}}</p>
+<div *ngIf="userData && userData.Role!='Admin' && userData.Role!='Mentor'" >
+    <h2>Tasks statistics</h2>
+    <div *ngIf="statisticsLoading" class="tasks-spinner-container">
+        <mat-spinner class="spinner-margins"></mat-spinner>
     </div>
-    <div class=states>
-        <h3>Done</h3>
-        <p>{{userStats.DoneNumber}}</p>
-    </div>
-    <div class=states>
-        <h3>Approved</h3>
-        <p>{{userStats.ApprovedNumber}}</p>
-    </div>
-    <div class=states>
-        <h3>Rejected</h3>
-        <p>{{userStats.RejectedNumber}}</p>
+    <div class="stats" *ngIf="userStats">
+        <div class="states-first">
+            <h3>In progress</h3>
+            <p>{{userStats.InProgressNumber}}</p>
+        </div>
+        <div class=states>
+            <h3>Done</h3>
+            <p>{{userStats.DoneNumber}}</p>
+        </div>
+        <div class=states>
+            <h3>Approved</h3>
+            <p>{{userStats.ApprovedNumber}}</p>
+        </div>
+        <div class=states>
+            <h3>Rejected</h3>
+            <p>{{userStats.RejectedNumber}}</p>
+        </div>
     </div>
 </div>

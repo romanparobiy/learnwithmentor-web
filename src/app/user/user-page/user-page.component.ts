@@ -62,14 +62,21 @@ export class UserPageComponent implements OnInit {
               this.imageLoading = false;
             }
           );
-          this.userService.getStatistics().subscribe(
-            r => {
-              if (this.httpStatusCodeService.isOk(r.status)) {
-                this.userStats = r.body;
+
+          if  (this.userData.Role=='Admin' || this.userData.Role=='Mentor')
+          {
+            this.statisticsLoading = false;
+          }
+          else{
+            this.userService.getStatistics().subscribe(
+              r => {
+                if (this.httpStatusCodeService.isOk(r.status)) {
+                  this.userStats = r.body;
+                }
+                this.statisticsLoading = false;
               }
-              this.statisticsLoading = false;
-            }
-          );
+            );
+          }
         }
       );
     });
