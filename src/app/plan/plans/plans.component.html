@@ -1,3 +1,4 @@
+
 <mat-accordion>
     <mat-expansion-panel *ngFor="let plan of plans">
       <mat-expansion-panel-header>
@@ -5,6 +6,6 @@
             {{plan.Name}}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-plan-details [plan]="plan"></app-plan-details>      
+      <app-plan-details [plan]="plan"></app-plan-details> 
     </mat-expansion-panel>    
   </mat-accordion>
