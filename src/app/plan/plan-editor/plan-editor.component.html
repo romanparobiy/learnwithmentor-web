@@ -10,11 +10,10 @@
   <br/>
   <button mat-button (click)="fileInput.click()">Select plan image</button>
   <mat-grid-list cols="2">
-      <mat-spinner *ngIf = "!tasksInPlan"></mat-spinner>
-    <mat-grid-tile>
+        <mat-grid-tile>
+        <mat-spinner *ngIf = "!tasksInPlan"></mat-spinner>
       <app-tasks-list-editor 
-      [tasks]="tasksInPlan" [tasksInPlan]="true" (taskChange)="onTaskChange(true,$event)">
- 
+      [tasks]="tasksInPlan" [tasksInPlan]="true" (taskChange)="onTaskChange(true,$event)">  
     </app-tasks-list-editor>
     </mat-grid-tile>
     <mat-grid-tile>
