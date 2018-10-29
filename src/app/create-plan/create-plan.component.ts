@@ -35,6 +35,7 @@ export class CreatePlanComponent implements OnInit {
   addTask = false;
   result: Task[];
   created = false;
+  savedChanges = false;
   displayedColumns = ['Name', 'Description'];
 
   selectedFile: File = null;
@@ -75,6 +76,8 @@ export class CreatePlanComponent implements OnInit {
       };
       this.planService.updatePlan(plan as Plan).subscribe();
     }
+    this.alertWindow.openSnackBar('Saved', 'Ok');
+    this.savedChanges = true;
 
   }
 
