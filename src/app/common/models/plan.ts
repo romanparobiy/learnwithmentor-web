@@ -11,4 +11,5 @@ export class Plan {
     ModifierLstName: string;
     CreateDate: Date;
     ModDate: Date;
+    IsPrivate: boolean;
 }

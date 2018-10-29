@@ -22,9 +22,10 @@
       </div>
 
       <button mat-raised-button color="primary" (click)="createPlan()" class="button-data " [disabled]="created">Create plan</button>
+     
+      <mat-checkbox class = 'private-checkbox' [disabled]="created" (change) = "toggleVisibility()"> Make private</mat-checkbox>
    
         <button mat-raised-button color="primary" (click)="openAddTasks()" class="button-data position" *ngIf="created" >Add tasks</button>
-     
 
     </div>
   </div>

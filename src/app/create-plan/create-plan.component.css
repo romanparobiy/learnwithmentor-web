@@ -55,3 +55,6 @@ min-width: 25%;
     display: flex;
     justify-content: center;
 }
+.private-checkbox{
+    margin-left: 10px;
+}
