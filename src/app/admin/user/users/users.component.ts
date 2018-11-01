@@ -145,6 +145,9 @@ export class UsersComponent implements OnInit {
       paginator => {
         this.paginator = paginator;
         this.users = this.paginator.Items;
+        if (this.selectedAll === true) {
+          this.selectedAll = false;
+        }
       });
     this.lastFunction = this.setPage;
     this.lastArgument = null;
@@ -171,6 +174,9 @@ export class UsersComponent implements OnInit {
       this.userService.searchPage(this.term, this.roleName, event.pageSize, event.pageIndex).subscribe(paginator => {
         this.paginator = paginator;
         this.users = this.paginator.Items;
+        if (this.selectedAll === true) {
+          this.selectedAll = false;
+        }
       });
     }
   }
