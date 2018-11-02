@@ -1,5 +1,7 @@
-
-<mat-accordion>
+<div class="center-spiner">
+    <mat-spinner *ngIf = "!plans" class="spiner-margins"></mat-spinner>
+</div>
+<mat-accordion *ngIf="plans">
     <mat-expansion-panel *ngFor="let plan of plans">
       <mat-expansion-panel-header>
         <mat-panel-title>
