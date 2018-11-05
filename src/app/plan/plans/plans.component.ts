@@ -11,8 +11,6 @@ import { PlanService } from '../../common/services/plan.service';
 export class PlansComponent implements OnInit {
   plans: Plan[];
   hasPermisionsToDelete = false;
-  id: number;
-  index: number;
   constructor(private planService: PlanService, private authService: AuthService) {
     planService.getPlans().subscribe( (x: Plan[]) => this.plans = x);
   }
@@ -23,9 +21,8 @@ export class PlansComponent implements OnInit {
   }
 
   onDelete(id: number): void {
-    this.id = id;
-    this.planService.deletePlanById(this.id).subscribe();
-    this.index = this.plans.findIndex((plan: Plan) => plan.Id === id);
-    this.plans.splice(this.index, 1);
+    this.planService.deletePlanById(id).subscribe();
+    const index = this.plans.findIndex((plan: Plan) => plan.Id === id);
+    this.plans.splice(index, 1);
   }
 }
