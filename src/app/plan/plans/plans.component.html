@@ -8,6 +8,10 @@
             {{plan.Name}}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <app-plan-details [plan]="plan"></app-plan-details> 
+      <app-plan-details [plan]="plan">
+      </app-plan-details>
+      <button *ngIf="hasPermisionsToDelete" mat-button (click)="onDelete(plan.Id)" >
+          Delete
+      </button>
     </mat-expansion-panel>    
   </mat-accordion>

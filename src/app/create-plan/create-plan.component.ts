@@ -35,6 +35,7 @@ export class CreatePlanComponent implements OnInit {
   addTask = false;
   result: Task[];
   created = false;
+  privatePlanChecked = false;
   displayedColumns = ['Name', 'Description'];
 
   selectedFile: File = null;
@@ -85,7 +86,8 @@ export class CreatePlanComponent implements OnInit {
     } else {
       this.published = false;
       const plan = {
-        Name: this.name, Description: this.description, Published: this.published, CreatorId: this.idCreator
+        Name: this.name, Description: this.description, Published: this.published, CreatorId: this.idCreator,
+        IsPrivate: this.privatePlanChecked
       };
       this.planService.createPlan(plan as Plan).subscribe(res => {
         this.currentId = res;
@@ -110,10 +112,17 @@ export class CreatePlanComponent implements OnInit {
       const preview = document.getElementById('newImage') as HTMLImageElement;
       const reader = new FileReader();
       reader.onloadend = function () {
-        preview.src = reader.result;
+        preview.src = String(reader.result);
       };
       reader.readAsDataURL(this.selectedFile);
     }
+  }
+
+  toggleVisibility() {
+    if (this.privatePlanChecked) {
+      this.privatePlanChecked = false;
+    }
+    this.privatePlanChecked = true;
   }
 
   ngOnInit() {
