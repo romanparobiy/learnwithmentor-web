@@ -100,3 +100,14 @@ button {
   border-radius: 2px;
   padding: 0 0 2px 2px;
 }
+
+.center-spiner {
+  display: flex;
+  justify-content: center;
+}
+
+.spiner-margins {
+  margin: 10% 10%;
+  height: 50%;
+}
+
