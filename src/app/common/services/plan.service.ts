@@ -83,11 +83,9 @@ export class PlanService {
 
   deletePlanById(id: number): Observable<any> {
     const link = `${this.url}/${id}`;
-    return this.http.delete<Plan>(link,{ observe: 'response', headers: this.reqHeader}).pipe(
+    return this.http.delete<Plan>(link, { observe: 'response', headers: this.reqHeader}).pipe(
       catchError(this.handleError<Plan>('deletePlan'))
     );
-      
-  
   }
 
   updateImage(id: number, file: File) {
@@ -95,7 +93,8 @@ export class PlanService {
     if (file) {
       fd.append('image', file, file.name);
       return this.http.post(`${this.url}/${id}/image`, fd, { observe: 'response' }).pipe(
-        catchError(val => of(val)));
+        catchError(val => of(val))
+      );
     }
   }
 

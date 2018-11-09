@@ -16,7 +16,8 @@ export class PlansComponent implements OnInit {
   errorMessage: string;
   errorMessageActive = false;
 
-  constructor(private planService: PlanService, private authService: AuthService,private httpStatusCodeService: HttpStatusCodeService,private alertwindow: AlertWindowsComponent,) {
+  constructor(private planService: PlanService, private authService: AuthService, private httpStatusCodeService: HttpStatusCodeService,
+     private alertwindow: AlertWindowsComponent) {
     planService.getPlans().subscribe( (x: Plan[]) => this.plans = x);
   }
 
