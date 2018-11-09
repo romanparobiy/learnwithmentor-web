@@ -20,9 +20,12 @@ export class PlanService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  private reqHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
+
   private httpOptionsNoAuth = {
     headers: new HttpHeaders({ 'No-Auth': 'True' })
   };
+
   private url = `${environment.apiUrl}plan`;
 
   getPlans(): Observable<Plan[]> {
@@ -78,10 +81,13 @@ export class PlanService {
     );
   }
 
-  deletePlanById(id: number): Observable<Plan> {
-    return this.http.delete<Plan>(`${this.url}/${id}`, this.httpOptions).pipe(
+  deletePlanById(id: number): Observable<any> {
+    const link = `${this.url}/${id}`;
+    return this.http.delete<Plan>(link,{ observe: 'response', headers: this.reqHeader}).pipe(
       catchError(this.handleError<Plan>('deletePlan'))
     );
+      
+  
   }
 
   updateImage(id: number, file: File) {
