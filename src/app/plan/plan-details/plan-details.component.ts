@@ -3,6 +3,7 @@ import { Plan } from '../../common/models/plan';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../common/services/auth.service';
 import { PlanEditorComponent } from '../plan-editor/plan-editor.component';
+import { PlansComponent } from '../plans/plans.component';
 
 @Component({
   selector: 'app-plan-details',
@@ -14,7 +15,7 @@ export class PlanDetailsComponent implements OnInit {
   @Input()
   plan: Plan;
   hasPermisionsToEdit = false;
-  constructor(public dialog: MatDialog, private authService: AuthService) { }
+  constructor(public dialog: MatDialog, private authService: AuthService, private plansComponent: PlansComponent) { }
 
   ngOnInit() {
    if (this.authService.isAdmin() || this.authService.isMentor()) {
