@@ -2,16 +2,25 @@
     <mat-spinner *ngIf = "!plans" class="spiner-margins"></mat-spinner>
 </div>
 <mat-accordion *ngIf="plans">
-    <mat-expansion-panel *ngFor="let plan of plans">
+    <mat-expansion-panel *ngFor="let plan of plans" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
             {{plan.Name}}
         </mat-panel-title>
-      </mat-expansion-panel-header>
+        <button *ngIf="hasPermisionsToDelete && hasPermisionToEdit" mat-icon-button [matMenuTriggerFor]="menu" 
+        (click)="$event.stopPropagation();">
+                &#x22EE;
+          </button>
+          <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openEditDialog(plan.Id)">
+                Edit
+          </button>
+          <button mat-menu-item (click)="onDelete(plan.Id)">
+                Delete
+          </button>
+          </mat-menu>
+        </mat-expansion-panel-header>
       <app-plan-details [plan]="plan">
       </app-plan-details>
-      <button *ngIf="hasPermisionsToDelete" mat-button (click)="onDelete(plan.Id)" >
-          Delete
-      </button>
     </mat-expansion-panel>    
   </mat-accordion>

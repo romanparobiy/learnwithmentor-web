@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Plan } from '../../common/models/plan';
+import { MatDialog } from '@angular/material/dialog';
+import { PlanEditorComponent } from '../plan-editor/plan-editor.component';
 import { HttpStatusCodeService } from '../../common/services/http-status-code.service';
 import { AuthService } from '../../common/services/auth.service';
 import { PlanService } from '../../common/services/plan.service';
@@ -13,20 +15,29 @@ import { AlertWindowsComponent } from '../../components/alert-windows/alert-wind
 export class PlansComponent implements OnInit {
   plans: Plan[];
   hasPermisionsToDelete = false;
+  hasPermisionToEdit = false;
   errorMessage: string;
   errorMessageActive = false;
 
-  constructor(private planService: PlanService, private authService: AuthService, private httpStatusCodeService: HttpStatusCodeService,
-     private alertwindow: AlertWindowsComponent) {
+  constructor(public dialog: MatDialog, private planService: PlanService, private authService: AuthService,
+    private httpStatusCodeService: HttpStatusCodeService, private alertwindow: AlertWindowsComponent) {
     planService.getPlans().subscribe( (x: Plan[]) => this.plans = x);
   }
 
   ngOnInit() {
     if (this.authService.isAdmin() || this.authService.isMentor()) {
       this.hasPermisionsToDelete = true;
+      this.hasPermisionToEdit = true;
     }
   }
 
+  openEditDialog(id: number): void {
+    const index = this.plans.findIndex((plan: Plan) => plan.Id === id);
+    const dialogRef = this.dialog.open(PlanEditorComponent, {
+      width: '900px',
+      data: this.plans[index]
+    });
+  }
   activateErrorMessage(message: string): void {
     this.errorMessage = message;
     this.errorMessageActive = true;

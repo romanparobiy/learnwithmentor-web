@@ -87,7 +87,7 @@ export class PlanEditorComponent implements OnInit {
       const preview = document.getElementById('newImage') as HTMLImageElement;
       const reader = new FileReader();
       reader.onloadend = function () {
-        preview.src = reader.result;
+        preview.src = String(reader.result);
       };
       reader.readAsDataURL(this.selectedFile);
     }
