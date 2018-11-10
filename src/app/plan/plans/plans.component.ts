@@ -32,7 +32,7 @@ export class PlansComponent implements OnInit {
       data: this.plans[index]
     });
   }
-
+  
   onDelete(id: number): void {
     this.planService.deletePlanById(id).subscribe();
     const index = this.plans.findIndex((plan: Plan) => plan.Id === id);
