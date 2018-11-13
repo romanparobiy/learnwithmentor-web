@@ -6,6 +6,7 @@ import { HttpStatusCodeService } from '../../common/services/http-status-code.se
 import { AuthService } from '../../common/services/auth.service';
 import { PlanService } from '../../common/services/plan.service';
 import { AlertWindowsComponent } from '../../components/alert-windows/alert-windows.component';
+import { DialogsService } from '../../components/dialogs/dialogs.service';
 
 @Component({
   selector: 'app-plans',
@@ -19,18 +20,20 @@ export class PlansComponent implements OnInit {
   errorMessage: string;
   errorMessageActive = false;
 
-  constructor(public dialog: MatDialog, private planService: PlanService, private authService: AuthService,
-    private httpStatusCodeService: HttpStatusCodeService, private alertwindow: AlertWindowsComponent) {
+  constructor(public dialog: MatDialog,
+    private dialogsService: DialogsService,
+    private planService: PlanService,
+    private authService: AuthService,
+    private httpStatusCodeService: HttpStatusCodeService,
+    private alertwindow: AlertWindowsComponent ) {
     planService.getPlans().subscribe( (x: Plan[]) => this.plans = x);
   }
-
   ngOnInit() {
     if (this.authService.isAdmin() || this.authService.isMentor()) {
       this.hasPermisionsToDelete = true;
       this.hasPermisionToEdit = true;
     }
   }
-
   openEditDialog(id: number): void {
     const index = this.plans.findIndex((plan: Plan) => plan.Id === id);
     const dialogRef = this.dialog.open(PlanEditorComponent, {
@@ -52,7 +55,7 @@ export class PlansComponent implements OnInit {
           if (index > -1) {
              deletedElement = this.plans.splice(index, 1)[0];
           }
-          this.alertwindow.openSnackBar(deletedElement.Name + ' deleted', 'Ok');
+          this.alertwindow.openSnackBar('Plan #S' + deletedElement.Name + ' deleted', 'Ok');
           if (this.plans === undefined || this.plans.length < 1) {
             this.activateErrorMessage('There are no plans in this group');
             this.plans = [];
@@ -63,5 +66,15 @@ export class PlansComponent implements OnInit {
         this.alertwindow.openSnackBar('Error ocurred on deletion: please try again', 'Ok');
       }
     );
+  }
+
+  DeleteClick(id: number): void {
+    this.dialogsService
+      .confirm('Confirm Dialog', 'Are you sure you want delete plan?')
+      .subscribe(res => {
+        if (res) {
+          this.onDelete(id);
+      }
+    });
   }
 }
