@@ -70,7 +70,7 @@ export class PlansComponent implements OnInit {
 
   DeleteClick(id: number): void {
     this.dialogsService
-      .confirm('Confirm Dialog', 'Are you sure you want delete plan?')
+      .confirm('Confirm Dialog', 'Are you sure you want to delete plan?')
       .subscribe(res => {
         if (res) {
           this.onDelete(id);
