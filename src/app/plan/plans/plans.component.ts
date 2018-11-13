@@ -55,7 +55,7 @@ export class PlansComponent implements OnInit {
           if (index > -1) {
              deletedElement = this.plans.splice(index, 1)[0];
           }
-          this.alertwindow.openSnackBar('Plan #S' + deletedElement.Name + ' deleted', 'Ok');
+          this.alertwindow.openSnackBar('Plan #' + deletedElement.Name + ' deleted', 'Ok');
           if (this.plans === undefined || this.plans.length < 1) {
             this.activateErrorMessage('There are no plans in this group');
             this.plans = [];
