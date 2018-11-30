@@ -8,5 +8,5 @@ export class UserTask {
     ProposeEndDate: Date;
     MentorId: number;
     Icon: string;
-    StyleClass : string;
+    StyleClass: string;
 }

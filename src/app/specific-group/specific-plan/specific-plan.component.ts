@@ -128,7 +128,6 @@ export class SpecificPlanComponent implements OnInit {
     }
   }
 
-
   onResultClick(userTask: UserTask, task: Task) {
     const data = { userTask: userTask, task: task };
     if (this.is_student) {
@@ -222,16 +221,16 @@ export class SpecificPlanComponent implements OnInit {
 
   setPictureState(section: number, id: number) {
     let task = this.sections[section].Content.UsersTasks[id].UserTasks[0];
-    if (task.State.toUpperCase() === States.inProgress) {
+    if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.inProgress) {
       this.sections[section].Content.UsersTasks[id].UserTasks[0].Icon = 'remove';
       this.sections[section].Content.UsersTasks[id].UserTasks[0].StyleClass = 'stateIcon black';
-    } else if (task.State.toUpperCase() === States.done) {
+    } else if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.done) {
       this.sections[section].Content.UsersTasks[id].UserTasks[0].Icon = 'done';
       this.sections[section].Content.UsersTasks[id].UserTasks[0].StyleClass = 'stateIcon blue';
-    } else if (task.State.toUpperCase() === States.approved) {
+    } else if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.approved) {
       this.sections[section].Content.UsersTasks[id].UserTasks[0].Icon = 'done';
       this.sections[section].Content.UsersTasks[id].UserTasks[0].StyleClass = 'stateIcon green';
-    } else if (task.State.toUpperCase() === States.rejected) {
+    } else if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.rejected) {
       this.sections[section].Content.UsersTasks[id].UserTasks[0].Icon = 'close';
       this.sections[section].Content.UsersTasks[id].UserTasks[0].StyleClass = 'stateIcon red';
     } else {
