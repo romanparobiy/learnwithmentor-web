@@ -220,7 +220,6 @@ export class SpecificPlanComponent implements OnInit {
   }
 
   setPictureState(section: number, id: number) {
-    let task = this.sections[section].Content.UsersTasks[id].UserTasks[0];
     if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.inProgress) {
       this.sections[section].Content.UsersTasks[id].UserTasks[0].Icon = 'remove';
       this.sections[section].Content.UsersTasks[id].UserTasks[0].StyleClass = 'stateIcon black';
