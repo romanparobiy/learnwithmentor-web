@@ -50,8 +50,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "learnwithmentor-web:build",
-		 
+            "browserTarget": "learnwithmentor-web:build"
           },
           "configurations": {
             "production": {
