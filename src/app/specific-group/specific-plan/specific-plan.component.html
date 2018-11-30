@@ -32,7 +32,13 @@
                 </span>
                 <div class="stateIcons" *ngIf="section.Content.UsersTasks">
                   <div class="states" *ngFor="let s of section.Content.UsersTasks[i].UserTasks; let i = index">
-                    <img [src]="s.Image" [class.clicked]="ischecked(i)" class="userstatesicons" matTooltip={{getState(s.State)}}/>
+                    <div style="position: relative;" class="userstatesicons">
+                      <div matTooltip={{getState(s.State)}} >
+                        <mat-icon [innerText]="[s.Icon]" [ngClass]="[s.StyleClass]"></mat-icon>
+                      </div>
+                      <div [class.clicked]="ischecked(i)">
+                      </div>
+                    </div>
                   </div>
                 </div>
               </mat-panel-title>

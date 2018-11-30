@@ -60,7 +60,7 @@ export class TaskSubmitorComponent implements OnInit {
 
   saveChanges() {
     this.userTask.State = States.done;
-    this.userTask.Image = this.imageService.setImage(States.done);
+    this.userTask.Icon = this.imageService.setImage(States.done);
     const utask = { Id: this.userTask.Id, Result: this.userTask.Result };
     this.taskService.updateUserTaskResult(utask as UserTask).subscribe(ut => ut.headers);
     this.taskService.updateUserTaskState(this.userTask.Id, this.userTask.State).subscribe();

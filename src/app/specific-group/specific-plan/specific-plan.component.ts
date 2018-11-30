@@ -201,38 +201,43 @@ export class SpecificPlanComponent implements OnInit {
   getPicturesState(alluserState: UserTask[]): UserTask[] {
     for (const userState of alluserState) {
       if (userState.State.toUpperCase() === States.inProgress) {
-        userState.Image = '../../../assets/images/inprogress.png';
-      } else
-        if (userState.State.toUpperCase() === States.done) {
-          userState.Image = '../../../assets/images/done.png';
-        } else
-          if (userState.State.toUpperCase() === States.approved) {
-            userState.Image = '../../../assets/images/approved.png';
-          } else
-            if (userState.State.toUpperCase() === States.rejected) {
-              userState.Image = '../../../assets/images/rejected.png';
-            } else {
-              userState.Image = '../../../assets/images/inprogress.png';
-            }
+        userState.Icon = 'remove';
+        userState.StyleClass = 'stateIcon black';
+      } else if (userState.State.toUpperCase() === States.done) {
+        userState.Icon = 'done';
+        userState.StyleClass = 'stateIcon blue';
+      } else if (userState.State.toUpperCase() === States.approved) {
+        userState.Icon = 'done';
+        userState.StyleClass = 'stateIcon green';
+      } else if (userState.State.toUpperCase() === States.rejected) {
+        userState.Icon = 'close';
+        userState.StyleClass = 'stateIcon red';
+      } else {
+        userState.Icon = 'close';
+        userState.StyleClass = 'stateIcon red';
+      }
     }
     return alluserState;
   }
 
   setPictureState(section: number, id: number) {
-    if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.inProgress) {
-      this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/inprogress.png';
-    } else
-      if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.done) {
-        this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/done.png';
-      } else
-        if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.approved) {
-          this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/approved.png';
-        } else
-          if (this.sections[section].Content.UsersTasks[id].UserTasks[0].State.toUpperCase() === States.rejected) {
-            this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/rejected.png';
-          } else {
-            this.sections[section].Content.UsersTasks[id].UserTasks[0].Image = '../../../assets/images/inprogress.png';
-          }
+    let task = this.sections[section].Content.UsersTasks[id].UserTasks[0];
+    if (task.State.toUpperCase() === States.inProgress) {
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].Icon = 'remove';
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].StyleClass = 'stateIcon black';
+    } else if (task.State.toUpperCase() === States.done) {
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].Icon = 'done';
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].StyleClass = 'stateIcon blue';
+    } else if (task.State.toUpperCase() === States.approved) {
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].Icon = 'done';
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].StyleClass = 'stateIcon green';
+    } else if (task.State.toUpperCase() === States.rejected) {
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].Icon = 'close';
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].StyleClass = 'stateIcon red';
+    } else {
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].Icon = 'close';
+      this.sections[section].Content.UsersTasks[id].UserTasks[0].StyleClass = 'stateIcon red';
+    }
   }
 
   getUsersWithPictures(groupUsers: UserWithImage[]) {
